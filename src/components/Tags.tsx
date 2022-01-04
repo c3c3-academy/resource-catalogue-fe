@@ -1,3 +1,4 @@
+import "../styles/Tags.css";
 import SingleTag from "./SingleTag";
 
 export default function Tags(): JSX.Element {
