@@ -2,13 +2,13 @@ export default function NavBar(): JSX.Element {
   return (
     <ul>
       <li>
-        <a href="#">Main Page</a>
+        <a href="https://www.google.com/">Main Page</a>
       </li>
       <li>
-        <a href="#">Add Resource</a>
+        <a href="https://www.google.com/">Add Resource</a>
       </li>
       <li>
-        <a href="#">Study List</a>
+        <a href="https://www.google.com/">Study List</a>
       </li>
     </ul>
   );
