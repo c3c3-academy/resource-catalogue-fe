@@ -18,6 +18,9 @@ export default function AppHeader({
   setUserId,
 }: AppHeaderProps): JSX.Element {
   const [userList, setUserList] = useState<IUser[]>([]);
+  const handleSelectUser = (id: string) => {
+    setUserId(id);
+  };
 
   useEffect(() => {
     axios
@@ -40,13 +43,24 @@ export default function AppHeader({
       <h1>Welcome to Cohort 3 Resource Catalogue</h1>
       {userId === "" ? (
         <div className="LoginSelector">
-          <select name="ChooseUser" id="ChooseUser">
+          <select
+            name="ChooseUser"
+            id="ChooseUser"
+            onChange={(e) => handleSelectUser(e.target.value)}
+          >
             <option value="">Select User</option>
             {userOptions}
           </select>
         </div>
       ) : (
-        <button>Log out</button>
+        <>
+          <p>
+            You are now logged in as
+            {" " +
+              userList.filter((user) => user.id === parseInt(userId))[0].name}
+          </p>
+          <button onClick={() => setUserId("")}>Log out</button>
+        </>
       )}
       <NavBar />
     </>

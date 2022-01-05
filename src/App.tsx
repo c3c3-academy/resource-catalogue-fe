@@ -17,7 +17,8 @@ function App(): JSX.Element {
             path="/"
             element={
               <>
-                <AppHeader userId={userId} setUserId={setUserId}/> <MainContent />{" "}
+                <AppHeader userId={userId} setUserId={setUserId} />{" "}
+                <MainContent />{" "}
               </>
             }
           />
@@ -25,7 +26,7 @@ function App(): JSX.Element {
             path="/add-resources"
             element={
               <>
-                <AppHeader userId={userId} setUserId={setUserId}/>
+                <AppHeader userId={userId} setUserId={setUserId} />
                 <AddResources />
               </>
             }
@@ -34,7 +35,7 @@ function App(): JSX.Element {
             path="/to-study-list"
             element={
               <>
-                <AppHeader userId={userId} setUserId={setUserId}/>
+                <AppHeader userId={userId} setUserId={setUserId} />
                 <ToStudy />
               </>
             }
