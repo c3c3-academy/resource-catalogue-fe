@@ -3,7 +3,10 @@ import MainContent from "./components/MainContent";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ToStudy from "./routes/ToStudy";
 import AddResources from "./routes/AddResources";
+import { useState } from "react";
 function App(): JSX.Element {
+  const [userId, setUserId] = useState<string>("");
+
   return (
     <>
       {/* <AppHeader />
@@ -14,7 +17,7 @@ function App(): JSX.Element {
             path="/"
             element={
               <>
-                <AppHeader /> <MainContent />{" "}
+                <AppHeader userId={userId} setUserId={setUserId}/> <MainContent />{" "}
               </>
             }
           />
@@ -22,7 +25,7 @@ function App(): JSX.Element {
             path="/add-resources"
             element={
               <>
-                <AppHeader />
+                <AppHeader userId={userId} setUserId={setUserId}/>
                 <AddResources />
               </>
             }
@@ -31,7 +34,7 @@ function App(): JSX.Element {
             path="/to-study-list"
             element={
               <>
-                <AppHeader />
+                <AppHeader userId={userId} setUserId={setUserId}/>
                 <ToStudy />
               </>
             }

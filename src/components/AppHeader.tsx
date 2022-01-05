@@ -8,7 +8,15 @@ interface IUser {
   isFaculty: boolean;
 }
 
-export default function AppHeader(): JSX.Element {
+interface AppHeaderProps {
+  userId: string;
+  setUserId: (userId: string) => void;
+}
+
+export default function AppHeader({
+  userId,
+  setUserId,
+}: AppHeaderProps): JSX.Element {
   const [userList, setUserList] = useState<IUser[]>([]);
 
   useEffect(() => {
@@ -30,12 +38,16 @@ export default function AppHeader(): JSX.Element {
   return (
     <>
       <h1>Welcome to Cohort 3 Resource Catalogue</h1>
-      <div className="LoginSelector">
-        <select name="ChooseUser" id="ChooseUser">
-          <option value="">Select User</option>
-          {userOptions}
-        </select>
-      </div>
+      {userId === "" ? (
+        <div className="LoginSelector">
+          <select name="ChooseUser" id="ChooseUser">
+            <option value="">Select User</option>
+            {userOptions}
+          </select>
+        </div>
+      ) : (
+        <button>Log out</button>
+      )}
       <NavBar />
     </>
   );
