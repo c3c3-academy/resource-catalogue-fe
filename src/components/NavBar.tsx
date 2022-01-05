@@ -2,7 +2,7 @@ export default function NavBar(): JSX.Element {
   return (
     <ul>
       <li>
-        <a href="http://localhost:3000/dashboard">Main Page</a>
+        <a href="http://localhost:3000/">Main Page</a>
       </li>
       <li>
         <a href="http://localhost:3000/add-resources">Add Resource</a>
