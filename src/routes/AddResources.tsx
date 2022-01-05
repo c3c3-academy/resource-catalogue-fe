@@ -1,8 +1,11 @@
-import React, { useState, useContext, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+// import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
-const AddResources = () => {
+
+const AddResources = (): JSX.Element => {
+  /* eslint-disable  @typescript-eslint/no-unused-vars */
   const history = useNavigate();
+  /* eslint-enable  @typescript-eslint/no-unused-vars */
 
   return (
     <body>
