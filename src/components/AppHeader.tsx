@@ -1,5 +1,6 @@
 import NavBar from "./NavBar";
 import { useState, useEffect } from "react";
+import { API_BASE } from "../utils/APIFragments";
 import axios from "axios";
 
 interface IUser {
@@ -13,7 +14,7 @@ export default function AppHeader(): JSX.Element {
 
   useEffect(() => {
     axios
-      .get("https://resource-catalogue-be.herokuapp.com/users")
+      .get(`${API_BASE}/users`)
       .then(function (response) {
         setUserList(response.data);
       })
