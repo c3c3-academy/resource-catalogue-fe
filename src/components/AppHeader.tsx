@@ -13,12 +13,10 @@ interface AppHeaderProps {
   setUserId: (userId: string) => void;
 }
 
-export default function AppHeader({
-  userId,
-  setUserId,
-}: AppHeaderProps): JSX.Element {
+export default function AppHeader(): JSX.Element {
   const [userList, setUserList] = useState<IUser[]>([]);
   const handleSelectUser = (id: string) => {
+    //how do we set use id without using the state from App but the useParams from AddResources?
     setUserId(id);
   };
 

@@ -7,7 +7,7 @@ const AddResources = (): JSX.Element => {
   /* eslint-enable  @typescript-eslint/no-unused-vars */
 
   return (
-    <body>
+    <div>
       <h1>Add Resource</h1>
 
       <form>
@@ -53,7 +53,7 @@ const AddResources = (): JSX.Element => {
         </div>
       </form>
       <button>Add Resource </button>
-    </body>
+    </div>
   );
 };
 

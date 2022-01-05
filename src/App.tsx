@@ -17,25 +17,34 @@ function App(): JSX.Element {
             path="/"
             element={
               <>
-                <AppHeader userId={userId} setUserId={setUserId} />{" "}
+                <AppHeader />{" "}
                 <MainContent />{" "}
               </>
             }
           />
           <Route
-            path="/add-resources"
+            path="/:userid"
             element={
               <>
-                <AppHeader userId={userId} setUserId={setUserId} />
+                <AppHeader />{" "}
+                <MainContent />{" "}
+              </>
+            }
+          />
+          <Route
+            path="/:userid/add-resources"
+            element={
+              <>
+                <AppHeader />
                 <AddResources />
               </>
             }
           />
           <Route
-            path="/to-study-list"
+            path="/:userid/to-study-list"
             element={
               <>
-                <AppHeader userId={userId} setUserId={setUserId} />
+                <AppHeader />
                 <ToStudy />
               </>
             }
