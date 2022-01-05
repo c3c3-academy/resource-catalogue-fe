@@ -11,15 +11,31 @@ function App(): JSX.Element {
       <Router>
         <Routes>
           <Route
-            path="/dashboard"
+            path="/"
             element={
-              <div>
+              <>
                 <AppHeader /> <MainContent />{" "}
-              </div>
+              </>
             }
           />
-          <Route path="/add-resources" element={<AddResources />} />
-          <Route path="/to-study-list" element={<ToStudy />} />
+          <Route
+            path="/add-resources"
+            element={
+              <>
+                <AppHeader />
+                <AddResources />
+              </>
+            }
+          />
+          <Route
+            path="/to-study-list"
+            element={
+              <>
+                <AppHeader />
+                <ToStudy />
+              </>
+            }
+          />
         </Routes>
       </Router>
     </>

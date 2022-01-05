@@ -1,6 +1,5 @@
 // import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import NavBar from "../components/NavBar";
 
 const AddResources = (): JSX.Element => {
   /* eslint-disable  @typescript-eslint/no-unused-vars */
@@ -9,7 +8,6 @@ const AddResources = (): JSX.Element => {
 
   return (
     <body>
-      <NavBar />
       <h1>Add Resource</h1>
 
       <form>
