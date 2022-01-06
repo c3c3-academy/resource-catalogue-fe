@@ -1,50 +1,76 @@
 import AppHeader from "./components/AppHeader";
 import MainContent from "./components/MainContent";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
 import ToStudy from "./routes/ToStudy";
 import AddResources from "./routes/AddResources";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { IUser } from "./components/AppHeader";
+import axios from "axios";
+
+
 function App(): JSX.Element {
   const [userId, setUserId] = useState<string>("");
+  const [userList, setUserList] = useState<IUser[]>([]);
+  const { urluserid } = useParams();
+
+  useEffect(() => {
+    axios
+      .get("https://resource-catalogue-be.herokuapp.com/users")
+      .then(function (response) {
+        setUserList(response.data.users);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
+  const retrieveSavedUser = () => {
+    return localStorage.getItem("savedUserId");
+  }
+
+  const savedUserId = retrieveSavedUser()
+
+  useEffect(() => {setUserId(savedUserId ? savedUserId : "")
+   console.log("useEffect was called")}, [urluserid]);
+
+
 
   return (
     <>
-      {/* <AppHeader />
-      <MainContent /> */}
       <Router>
         <Routes>
           <Route
             path="/"
             element={
               <>
-                <AppHeader />{" "}
-                <MainContent />{" "}
+                <AppHeader userId={userId} setUserId={setUserId} userList={userList} urluserid={urluserid ? urluserid : ""} savedUserId={savedUserId ? savedUserId : ""}/>
+                <MainContent />
               </>
             }
           />
           <Route
-            path="/:userid"
+            path="/:urluserid"
             element={
               <>
-                <AppHeader />{" "}
-                <MainContent />{" "}
+                <AppHeader userId={userId} setUserId={setUserId} userList={userList} urluserid={urluserid ? urluserid : ""} savedUserId={savedUserId ? savedUserId : ""}/>
+                <MainContent />
               </>
             }
           />
           <Route
-            path="/:userid/add-resources"
+            path="/:urluserid/add-resources"
             element={
               <>
-                <AppHeader />
+                <AppHeader userId={userId} setUserId={setUserId} userList={userList} urluserid={urluserid ? urluserid : ""} savedUserId={savedUserId ? savedUserId : ""}/>
                 <AddResources />
               </>
             }
           />
           <Route
-            path="/:userid/to-study-list"
+            path="/:urluserid/to-study-list"
             element={
               <>
-                <AppHeader />
+                <AppHeader userId={userId} setUserId={setUserId} userList={userList} urluserid={urluserid ? urluserid : ""} savedUserId={savedUserId ? savedUserId : ""}/>
                 <ToStudy />
               </>
             }

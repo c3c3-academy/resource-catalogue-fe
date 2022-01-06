@@ -2,7 +2,7 @@ import NavBar from "./NavBar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-interface IUser {
+export interface IUser {
   id: number;
   name: string;
   isFaculty: boolean;
@@ -11,25 +11,32 @@ interface IUser {
 interface AppHeaderProps {
   userId: string;
   setUserId: (userId: string) => void;
+  userList: IUser[];
+  urluserid: string;
+  savedUserId: string;
 }
 
-export default function AppHeader(): JSX.Element {
-  const [userList, setUserList] = useState<IUser[]>([]);
+export default function AppHeader({
+  userId,
+  setUserId,
+  userList,
+  urluserid,
+  savedUserId,
+}: AppHeaderProps): JSX.Element {
   const handleSelectUser = (id: string) => {
-    //how do we set use id without using the state from App but the useParams from AddResources?
     setUserId(id);
   };
 
-  useEffect(() => {
-    axios
-      .get("https://resource-catalogue-be.herokuapp.com/users")
-      .then(function (response) {
-        setUserList(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
+  const handleLogIn = () => {
+    console.log(`You are logged in as ${userId}`);
+    localStorage.setItem("savedUserId", `${userId}`);
+  };
+
+  const handleLogOut = () => {
+    console.log(`You logged out`);
+    localStorage.removeItem("savedUserId")
+    console.log(localStorage.getItem("savedUserId"))
+    };
 
   const userOptions = userList.map((user) => (
     <option value={user.id} key={user.id}>
@@ -39,7 +46,7 @@ export default function AppHeader(): JSX.Element {
   return (
     <>
       <h1>Welcome to Cohort 3 Resource Catalogue</h1>
-      {userId === "" ? (
+      {savedUserId === null ? (
         <div className="LoginSelector">
           <select
             name="ChooseUser"
@@ -49,18 +56,19 @@ export default function AppHeader(): JSX.Element {
             <option value="">Select User</option>
             {userOptions}
           </select>
+          <button onClick={handleLogIn}>Log in</button>
         </div>
       ) : (
         <>
           <p>
             You are now logged in as
-            {" " +
-              userList.filter((user) => user.id === parseInt(userId))[0].name}
+            {/* {" " +
+              userList.filter((user) => user.id === parseInt(userId))[0].name} */}
           </p>
-          <button onClick={() => setUserId("")}>Log out</button>
+          <button onClick={handleLogOut}>Log out</button>
         </>
       )}
-      <NavBar />
+      <NavBar urluserid={userId} />
     </>
   );
 }
