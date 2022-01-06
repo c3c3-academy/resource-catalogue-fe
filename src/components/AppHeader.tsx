@@ -26,7 +26,7 @@ export default function AppHeader({
     axios
       .get("https://resource-catalogue-be.herokuapp.com/users")
       .then(function (response) {
-        setUserList(response.data);
+        setUserList(response.data.users);
       })
       .catch(function (error) {
         console.log(error);
