@@ -1,6 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { IResource, ITag } from "../utils/Interfaces";
+import { ITag } from "../utils/Interfaces";
 import { getTagId } from "../utils/getTagId";
 import NavBar from "../components/NavBar";
 import { API_BASE } from "../utils/APIFragments";
@@ -11,9 +11,6 @@ interface IAddResource {
 }
 
 export default function AddResources(props: IAddResource): JSX.Element {
-  const [resource, setResource] = useState<IResource | null>(null);
-  const [resourceId, setResourceId] = useState<number | null>(null);
-
   const [resourceName, setResourceName] = useState<string>("");
   const [authorName, setAuthorName] = useState<string>("");
   const [url, setURL] = useState<string>("");
@@ -69,28 +66,51 @@ export default function AddResources(props: IAddResource): JSX.Element {
   const history = useNavigate();
   /* eslint-enable  @typescript-eslint/no-unused-vars */
 
-  const handleSubmit = () => {
-    setResource({
-      resourceName: resourceName,
-      authorName: authorName,
-      url: url,
-      description: description,
-      contentType: contentType,
-      contentStage: contentStage,
-      postedByUserId: props.userId,
-      isRecommend: recommend,
-      reason: reason,
-    });
+  const handleSubmit = async () => {
+    let resourceId: number;
+    console.log("button");
+    console.log(API_BASE);
+    console.log(props.tags);
 
-    axios
-      .post(`${API_BASE}/resources`, resource)
-      .then(function (response) {
-        console.log(response);
-        setResourceId(response.data.id);
-      })
-      .catch(function (error) {
-        console.log(error);
+    try {
+      const response = await axios.post(`${API_BASE}/resources`, {
+        resourcename: resourceName,
+        authorname: authorName,
+        url: url,
+        description: description,
+        contenttype: contentType,
+        contentstage: contentStage,
+        postedbyuserid: props.userId,
+        isrecommend: recommend,
+        reason: reason,
       });
+      console.log(response);
+    } catch (error) {
+      console.log("failed to post...");
+      // setName("");
+      // setLocation(" ");
+      // setPriceRange("Price range");
+    }
+
+    // await axios
+    // //   .post(`${API_BASE}/resources`, {
+    //     resourcename: resourceName,
+    //     authorname: authorName,
+    //     url: url,
+    //     description: description,
+    //     contenttype: contentType,
+    //     contentstage: contentStage,
+    //     postedbyuserid: props.userId,
+    //     isrecommend: recommend,
+    //     reason: reason,
+    //   })
+    //   .then(function (response) {
+    //     console.log(response);
+    //     resourceId = response.data.resourceAdded.id;
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
 
     const tagList = enteredTags.split(", ");
     tagList.forEach((tag) => {
@@ -109,8 +129,6 @@ export default function AddResources(props: IAddResource): JSX.Element {
           });
       }
     });
-    setResource(null);
-    setResourceId(null);
 
     setResourceName("");
     setAuthorName("");
@@ -170,31 +188,33 @@ export default function AddResources(props: IAddResource): JSX.Element {
           />
         </div>
         <div>
+          <label htmlFor="type">Content Type: </label>
           <select
+            id="type"
             value={contentType}
             onChange={(e) => setContentType(e.target.value)}
           >
-            <option disabled>Content Type</option>
             {contentTypesOptions}
           </select>
+          <label htmlFor="stage">Recommeneded Stage: </label>
           <select
+            id="stage"
             value={contentStage}
             onChange={(e) => setContentStage(e.target.value)}
           >
-            <option disabled>Recommeneded Stage</option>
             {contentStageOptions}
           </select>
         </div>
-        <p>Do you recommend this resource?</p>
-        <select onChange={(e) => setRecommend(e.target.value)}>
+        <label htmlFor="recommend">Do you recommend this resource?: </label>
+        <select id="recommend" onChange={(e) => setRecommend(e.target.value)}>
           <option disabled>Recommened Type</option>
-          <option value="1">
+          <option value="good">
             I recommend this resource after having used it
           </option>
-          <option value="2">
+          <option value="bad">
             I do not recommend this resource, having used it
           </option>
-          <option value="3">
+          <option value="unknown">
             I haven't used this resource but it looks promising
           </option>
         </select>
@@ -207,7 +227,7 @@ export default function AddResources(props: IAddResource): JSX.Element {
           />
         </div>
       </form>
-      <button onClick={handleSubmit}>Add Resource </button>
+      <button onClick={() => handleSubmit()}>Add Resource </button>
     </div>
   );
 }

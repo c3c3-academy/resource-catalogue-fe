@@ -16,7 +16,7 @@ export default function AppHeader(): JSX.Element {
     axios
       .get(`${API_BASE}/users`)
       .then(function (response) {
-        setUserList(response.data);
+        setUserList(response.data.users);
       })
       .catch(function (error) {
         console.log(error);

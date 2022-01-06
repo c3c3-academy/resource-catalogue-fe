@@ -18,7 +18,7 @@ export function getTagId(props: Props): number {
         category: props.tagToCheck,
       })
       .then(function (response) {
-        tagId = response.data.id;
+        tagId = response.data.tags.id;
         console.log(response);
       })
       .catch(function (error) {

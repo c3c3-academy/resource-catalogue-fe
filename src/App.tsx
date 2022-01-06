@@ -9,14 +9,15 @@ import AddResources from "./routes/AddResources";
 import { API_BASE } from "./utils/APIFragments";
 
 function App(): JSX.Element {
-  const [userId, setUserId] = useState<number>(1);
+  // eslint-disable-next-line
+  const [userId, setUserId] = useState<number>(23);
   const [tags, setTags] = useState<ITag[]>([]);
 
   useEffect(() => {
     axios
       .get(`${API_BASE}/tags`)
       .then(function (response) {
-        setTags(response.data);
+        setTags(response.data.tags);
       })
       .catch(function (error) {
         // handle error
