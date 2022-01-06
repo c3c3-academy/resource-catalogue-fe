@@ -1,8 +1,12 @@
 // import React, { useState, useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-const ToStudy = (): JSX.Element => {
-  const { urluserid } = useParams();
+interface ToStudyProps {
+  savedUserId: string | null;
+}
+
+const ToStudy = ({savedUserId}: ToStudyProps): JSX.Element => {
+  // const { urluserid } = useParams();
 
   /* eslint-disable  @typescript-eslint/no-unused-vars */
   const history = useNavigate();
@@ -11,7 +15,7 @@ const ToStudy = (): JSX.Element => {
   return (
     <div>
       <h1>To Study</h1>
-      <p>{`This is the list to study of user ${urluserid}`}</p>
+      <p>{`This is the list to study of user ${savedUserId}`}</p>
     </div>
   );
 };

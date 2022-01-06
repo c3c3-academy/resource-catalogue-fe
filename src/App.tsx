@@ -9,9 +9,9 @@ import axios from "axios";
 
 
 function App(): JSX.Element {
-  const [userId, setUserId] = useState<string>("");
+  const [userId, setUserId] = useState<string | null>(null);
   const [userList, setUserList] = useState<IUser[]>([]);
-  const { urluserid } = useParams();
+  // const { urluserid } = useParams();
 
   useEffect(() => {
     axios
@@ -30,10 +30,13 @@ function App(): JSX.Element {
 
   const savedUserId = retrieveSavedUser()
 
-  useEffect(() => {setUserId(savedUserId ? savedUserId : "")
-   console.log("useEffect was called")}, [urluserid]);
 
+  useEffect(() => {setUserId(savedUserId ? savedUserId : null)
+   console.log("useEffect was called")}, []);
 
+  console.log(`The page has rendered and this is the userId state: ${userId}`)
+  console.log(`This is the item saved in memory: ${savedUserId}`)
+  console.log(`This is the userList: ${userList}`)
 
   return (
     <>
@@ -43,7 +46,7 @@ function App(): JSX.Element {
             path="/"
             element={
               <>
-                <AppHeader userId={userId} setUserId={setUserId} userList={userList} urluserid={urluserid ? urluserid : ""} savedUserId={savedUserId ? savedUserId : ""}/>
+                <AppHeader userId={userId} setUserId={setUserId} userList={userList} savedUserId={savedUserId ? savedUserId : ""}/>
                 <MainContent />
               </>
             }
@@ -52,7 +55,7 @@ function App(): JSX.Element {
             path="/:urluserid"
             element={
               <>
-                <AppHeader userId={userId} setUserId={setUserId} userList={userList} urluserid={urluserid ? urluserid : ""} savedUserId={savedUserId ? savedUserId : ""}/>
+                <AppHeader userId={userId} setUserId={setUserId} userList={userList} savedUserId={savedUserId ? savedUserId : ""}/>
                 <MainContent />
               </>
             }
@@ -61,7 +64,7 @@ function App(): JSX.Element {
             path="/:urluserid/add-resources"
             element={
               <>
-                <AppHeader userId={userId} setUserId={setUserId} userList={userList} urluserid={urluserid ? urluserid : ""} savedUserId={savedUserId ? savedUserId : ""}/>
+                <AppHeader userId={userId} setUserId={setUserId} userList={userList}  savedUserId={savedUserId ? savedUserId : ""}/>
                 <AddResources />
               </>
             }
@@ -70,8 +73,8 @@ function App(): JSX.Element {
             path="/:urluserid/to-study-list"
             element={
               <>
-                <AppHeader userId={userId} setUserId={setUserId} userList={userList} urluserid={urluserid ? urluserid : ""} savedUserId={savedUserId ? savedUserId : ""}/>
-                <ToStudy />
+                <AppHeader userId={userId} setUserId={setUserId} userList={userList}  savedUserId={savedUserId ? savedUserId : ""}/>
+                <ToStudy savedUserId={savedUserId}/>
               </>
             }
           />

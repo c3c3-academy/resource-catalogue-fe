@@ -9,10 +9,10 @@ export interface IUser {
 }
 
 interface AppHeaderProps {
-  userId: string;
-  setUserId: (userId: string) => void;
+  userId: string | null;
+  setUserId: (userId: string | null) => void;
   userList: IUser[];
-  urluserid: string;
+  // urluserid: string;
   savedUserId: string;
 }
 
@@ -20,22 +20,28 @@ export default function AppHeader({
   userId,
   setUserId,
   userList,
-  urluserid,
+  // urluserid,
   savedUserId,
 }: AppHeaderProps): JSX.Element {
-  const handleSelectUser = (id: string) => {
-    setUserId(id);
+  const [rerender, setRerender] = useState<boolean>(false)
+
+
+  const handleLogIn = (id: string | null) => {
+    localStorage.setItem("savedUserId", `${id}`);
+    setUserId(id)
+    setRerender(!rerender);
+    console.log(`You are logged in as ${savedUserId}`);
+    console.log(`The userId state is ${userId}`)
   };
 
-  const handleLogIn = () => {
-    console.log(`You are logged in as ${userId}`);
-    localStorage.setItem("savedUserId", `${userId}`);
-  };
 
   const handleLogOut = () => {
     console.log(`You logged out`);
-    localStorage.removeItem("savedUserId")
-    console.log(localStorage.getItem("savedUserId"))
+    localStorage.removeItem("savedUserId");
+    setUserId(null);
+    setRerender(!rerender);
+    console.log(`${savedUserId} has logged out`)
+    console.log(`${userId} is now the userId state`)
     };
 
   const userOptions = userList.map((user) => (
@@ -43,32 +49,32 @@ export default function AppHeader({
       {user.name}
     </option>
   ));
+
   return (
     <>
       <h1>Welcome to Cohort 3 Resource Catalogue</h1>
-      {savedUserId === null ? (
+      {savedUserId === null || userId ===null ? (
         <div className="LoginSelector">
           <select
             name="ChooseUser"
             id="ChooseUser"
-            onChange={(e) => handleSelectUser(e.target.value)}
+            onChange={(e) => handleLogIn(e.target.value)}
           >
             <option value="">Select User</option>
             {userOptions}
           </select>
-          <button onClick={handleLogIn}>Log in</button>
         </div>
       ) : (
         <>
-          <p>
+          {/* <p>
             You are now logged in as
-            {/* {" " +
-              userList.filter((user) => user.id === parseInt(userId))[0].name} */}
-          </p>
+            {" " +
+              userList.filter((user) => user.id === parseInt(savedUserId))[0].name}
+          </p> */}
           <button onClick={handleLogOut}>Log out</button>
         </>
       )}
-      <NavBar urluserid={userId} />
+      <NavBar savedUserId={userId} />
     </>
   );
 }

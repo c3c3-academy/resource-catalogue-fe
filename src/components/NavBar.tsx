@@ -1,20 +1,20 @@
 interface NavBarProps {
-  urluserid: string;
+  savedUserId: string | null;
 }
 
-export default function NavBar({ urluserid }: NavBarProps): JSX.Element {
+export default function NavBar({ savedUserId }: NavBarProps): JSX.Element {
   return (
     <ul>
       <li>
-        <a href={`http://localhost:3000/${urluserid}`}>Main Page</a>
+        <a href={`http://localhost:3000/${savedUserId}`}>Main Page</a>
       </li>
       <li>
-        <a href={`http://localhost:3000/${urluserid}/add-resources`}>
+        <a href={`http://localhost:3000/${savedUserId}/add-resources`}>
           Add Resource
         </a>
       </li>
       <li>
-        <a href={`http://localhost:3000/${urluserid}/to-study-list`}>
+        <a href={`http://localhost:3000/${savedUserId}/to-study-list`}>
           Study List
         </a>
       </li>
