@@ -2,6 +2,7 @@ import NavBar from "./NavBar";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import getusername from "../utils/getusername";
 
 export interface IUser {
   id: number;
@@ -81,11 +82,13 @@ export default function AppHeader({
         </div>
       ) : (
         <>
-          {/* <p>
-            You are now logged in as
-            {" " +
-              userList.filter((user) => user.id === parseInt()))[0].name}
-          </p> */}
+          {userList[0] && (
+            <p>
+              You are now logged in as
+              {" " + getusername(userList, parseInt(savedUserId))}
+            </p>
+          )}
+
           <button onClick={handleLogOut}>Log out</button>
         </>
       )}
