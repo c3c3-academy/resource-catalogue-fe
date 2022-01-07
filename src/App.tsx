@@ -51,6 +51,7 @@ function App(): JSX.Element {
                   setUserId={setUserId}
                   userList={userList}
                   savedUserId={savedUserId ? savedUserId : ""}
+                  setUserList={setUserList}
                 />
                 <MainContent />
               </>
@@ -65,6 +66,7 @@ function App(): JSX.Element {
                   setUserId={setUserId}
                   userList={userList}
                   savedUserId={savedUserId ? savedUserId : ""}
+                  setUserList={setUserList}
                 />
                 <MainContent />
               </>
@@ -79,6 +81,7 @@ function App(): JSX.Element {
                   setUserId={setUserId}
                   userList={userList}
                   savedUserId={savedUserId ? savedUserId : ""}
+                  setUserList={setUserList}
                 />
                 <UserMain savedUserId={savedUserId} />
               </>
@@ -93,6 +96,7 @@ function App(): JSX.Element {
                   setUserId={setUserId}
                   userList={userList}
                   savedUserId={savedUserId ? savedUserId : ""}
+                  setUserList={setUserList}
                 />
                 <AddResources />
               </>
@@ -107,6 +111,7 @@ function App(): JSX.Element {
                   setUserId={setUserId}
                   userList={userList}
                   savedUserId={savedUserId ? savedUserId : ""}
+                  setUserList={setUserList}
                 />
                 <ToStudy savedUserId={savedUserId} />
               </>
