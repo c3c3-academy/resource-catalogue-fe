@@ -15,9 +15,9 @@ export default function AddResources(props: IAddResource): JSX.Element {
   const [authorName, setAuthorName] = useState<string>("");
   const [url, setURL] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [contentType, setContentType] = useState<string>("");
-  const [contentStage, setContentStage] = useState<string>("");
-  const [recommend, setRecommend] = useState<string>("");
+  const [contentType, setContentType] = useState<string>("video");
+  const [contentStage, setContentStage] = useState<string>("Week 1: Workflows");
+  const [recommend, setRecommend] = useState<string>("good");
   const [reason, setReason] = useState<string>("");
   const [enteredTags, setEnteredTags] = useState<string>("");
 
@@ -71,9 +71,20 @@ export default function AddResources(props: IAddResource): JSX.Element {
     console.log("button");
     console.log(API_BASE);
     console.log(props.tags);
+    console.log({
+      resourcename: resourceName,
+      authorname: authorName,
+      url: url,
+      description: description,
+      contenttype: contentType,
+      contentstage: contentStage,
+      postedbyuserid: props.userId,
+      isrecommended: recommend,
+      reason: reason,
+    });
 
-    try {
-      const response = await axios.post(`${API_BASE}/resources`, {
+    await axios
+      .post(`${API_BASE}/resources`, {
         resourcename: resourceName,
         authorname: authorName,
         url: url,
@@ -81,36 +92,16 @@ export default function AddResources(props: IAddResource): JSX.Element {
         contenttype: contentType,
         contentstage: contentStage,
         postedbyuserid: props.userId,
-        isrecommend: recommend,
+        isrecommended: recommend,
         reason: reason,
+      })
+      .then(function (response) {
+        console.log(response);
+        resourceId = response.data.resourceAdded.id;
+      })
+      .catch(function (error) {
+        console.log(error);
       });
-      console.log(response);
-    } catch (error) {
-      console.log("failed to post...");
-      // setName("");
-      // setLocation(" ");
-      // setPriceRange("Price range");
-    }
-
-    // await axios
-    // //   .post(`${API_BASE}/resources`, {
-    //     resourcename: resourceName,
-    //     authorname: authorName,
-    //     url: url,
-    //     description: description,
-    //     contenttype: contentType,
-    //     contentstage: contentStage,
-    //     postedbyuserid: props.userId,
-    //     isrecommend: recommend,
-    //     reason: reason,
-    //   })
-    //   .then(function (response) {
-    //     console.log(response);
-    //     resourceId = response.data.resourceAdded.id;
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
 
     const tagList = enteredTags.split(", ");
     tagList.forEach((tag) => {
@@ -134,9 +125,9 @@ export default function AddResources(props: IAddResource): JSX.Element {
     setAuthorName("");
     setURL("");
     setDescription("");
-    setContentType("");
-    setContentStage("");
-    setRecommend("");
+    setContentType("video");
+    setContentStage("Week 1: Workflows");
+    setRecommend("good");
     setReason("");
     setEnteredTags("");
   };
