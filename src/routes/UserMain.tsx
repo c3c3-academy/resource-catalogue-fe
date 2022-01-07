@@ -1,21 +1,22 @@
 // import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Resources from "../components/Resources";
 
-interface ToStudyProps {
+interface UserMainProps {
   savedUserId: string | null;
 }
 
-const ToStudy = ({ savedUserId }: ToStudyProps): JSX.Element => {
+const UserMain = ({ savedUserId }: UserMainProps): JSX.Element => {
   /* eslint-disable  @typescript-eslint/no-unused-vars */
   const history = useNavigate();
   /* eslint-enable  @typescript-eslint/no-unused-vars */
 
   return (
     <div>
-      <h1>To Study</h1>
-      <p>{`This is the list to study of user ${savedUserId}`}</p>
+      <p>{`This is the main page of user ${savedUserId}`}</p>
+      <Resources />
     </div>
   );
 };
 
-export default ToStudy;
+export default UserMain;
