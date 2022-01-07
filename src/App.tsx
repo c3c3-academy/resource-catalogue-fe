@@ -57,37 +57,7 @@ function App(): JSX.Element {
             }
           />
           <Route
-            path="/null"
-            element={
-              <>
-                <AppHeader
-                  userId={userId}
-                  setUserId={setUserId}
-                  userList={userList}
-                  savedUserId={savedUserId ? savedUserId : ""}
-                  setUserList={setUserList}
-                />
-                <MainContent />
-              </>
-            }
-          />
-          <Route
-            path="/:savedUserId"
-            element={
-              <>
-                <AppHeader
-                  userId={userId}
-                  setUserId={setUserId}
-                  userList={userList}
-                  savedUserId={savedUserId ? savedUserId : ""}
-                  setUserList={setUserList}
-                />
-                <UserMain savedUserId={savedUserId} />
-              </>
-            }
-          />
-          <Route
-            path="/:savedUserId/add-resources"
+            path="/add-resources"
             element={
               <>
                 <AppHeader
@@ -102,7 +72,7 @@ function App(): JSX.Element {
             }
           />
           <Route
-            path="/:savedUserId/to-study-list"
+            path="/to-study-list"
             element={
               <>
                 <AppHeader

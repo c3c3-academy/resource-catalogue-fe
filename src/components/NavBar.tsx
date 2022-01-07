@@ -10,13 +10,13 @@ export default function NavBar({ savedUserId }: NavBarProps): JSX.Element {
   return (
     <ul>
       <li>
-        <a href={`${baseURL}${savedUserId}`}>Main Page</a>
+        <a href={`${baseURL}`}>Main Page</a>
       </li>
       <li>
-        <a href={`${baseURL}${savedUserId}/add-resources`}>Add Resource</a>
+        <a href={`${baseURL}add-resources`}>Add Resource</a>
       </li>
       <li>
-        <a href={`${baseURL}${savedUserId}/to-study-list`}>Study List</a>
+        <a href={`${baseURL}to-study-list`}>Study List</a>
       </li>
     </ul>
   );

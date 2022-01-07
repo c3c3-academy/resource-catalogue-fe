@@ -30,7 +30,6 @@ export default function AppHeader({
 
   const handleLogIn = (id: string | null) => {
     localStorage.setItem("savedUserId", `${id}`);
-    navigate(`/${localStorage.getItem("savedUserId")}`);
     setUserId(id);
     setRerender(!rerender);
     console.log(`You are logged in as ${savedUserId}`);
