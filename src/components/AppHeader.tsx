@@ -46,6 +46,17 @@ export default function AppHeader({
     console.log(`${savedUserId} has logged out`);
     console.log(`${userId} is now the userId state`);
   };
+    
+  useEffect(() => {
+    axios
+      .get("https://resource-catalogue-be.herokuapp.com/users")
+      .then(function (response) {
+        setUserList(response.data.users);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   const userOptions = userList.map((user) => (
     <option value={user.id} key={user.id}>
