@@ -1,8 +1,7 @@
 // import React, { useState, useContext, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AddResources = (): JSX.Element => {
-  // const { urluserid } = useParams();
   /* eslint-disable  @typescript-eslint/no-unused-vars */
   const history = useNavigate();
   /* eslint-enable  @typescript-eslint/no-unused-vars */

@@ -1,6 +1,6 @@
 import NavBar from "./NavBar";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export interface IUser {
   id: number;
@@ -23,26 +23,29 @@ export default function AppHeader({
   // urluserid,
   savedUserId,
 }: AppHeaderProps): JSX.Element {
-  const [rerender, setRerender] = useState<boolean>(false)
+  const [rerender, setRerender] = useState<boolean>(false);
 
+  const navigate = useNavigate();
 
   const handleLogIn = (id: string | null) => {
     localStorage.setItem("savedUserId", `${id}`);
-    setUserId(id)
+    navigate(`/${localStorage.getItem("savedUserId")}`);
+    setUserId(id);
     setRerender(!rerender);
     console.log(`You are logged in as ${savedUserId}`);
-    console.log(`The userId state is ${userId}`)
+    console.log(`The userId state is ${userId}`);
   };
-
 
   const handleLogOut = () => {
     console.log(`You logged out`);
     localStorage.removeItem("savedUserId");
+    navigate(`/`);
     setUserId(null);
     setRerender(!rerender);
-    console.log(`${savedUserId} has logged out`)
-    console.log(`${userId} is now the userId state`)
-    };
+
+    console.log(`${savedUserId} has logged out`);
+    console.log(`${userId} is now the userId state`);
+  };
 
   const userOptions = userList.map((user) => (
     <option value={user.id} key={user.id}>
@@ -53,7 +56,7 @@ export default function AppHeader({
   return (
     <>
       <h1>Welcome to Cohort 3 Resource Catalogue</h1>
-      {savedUserId === null || userId ===null ? (
+      {savedUserId === null || userId === null ? (
         <div className="LoginSelector">
           <select
             name="ChooseUser"
