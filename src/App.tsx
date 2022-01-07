@@ -6,7 +6,6 @@ import AddResources from "./routes/AddResources";
 import { useEffect, useState } from "react";
 import { IUser } from "./components/AppHeader";
 import axios from "axios";
-import UserMain from "./routes/UserMain";
 
 function App(): JSX.Element {
   const [userId, setUserId] = useState<string | null>(null);
