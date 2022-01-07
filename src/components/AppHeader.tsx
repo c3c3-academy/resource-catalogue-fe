@@ -84,7 +84,7 @@ export default function AppHeader({
           {/* <p>
             You are now logged in as
             {" " +
-              userList.filter((user) => user.id === parseInt(savedUserId))[0].name}
+              userList.filter((user) => user.id === parseInt()))[0].name}
           </p> */}
           <button onClick={handleLogOut}>Log out</button>
         </>
