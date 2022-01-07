@@ -89,7 +89,9 @@ export default function AppHeader({
           <button onClick={handleLogOut}>Log out</button>
         </>
       )}
-      <NavBar savedUserId={userId} />
+      {savedUserId !== null && userId !== null && (
+        <NavBar savedUserId={userId} />
+      )}
     </>
   );
 }
