@@ -36,7 +36,6 @@ function App(): JSX.Element {
 
   console.log(`The page has rendered and this is the userId state: ${userId}`);
   console.log(`This is the item saved in memory: ${savedUserId}`);
-  console.log(`This is the userList: ${userList}`);
 
   return (
     <>

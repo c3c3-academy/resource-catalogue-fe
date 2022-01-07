@@ -26,14 +26,11 @@ export default function Resources(): JSX.Element {
       .get(baseURL + "resources")
       .then(function (response) {
         setResources(response.data.resources);
-        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
       });
   }, []);
-
-  console.log(resources);
 
   return (
     <div className="Resources">
