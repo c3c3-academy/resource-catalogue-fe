@@ -2,7 +2,7 @@ import "../styles/SingleResource.css";
 
 interface Resource {
   id: string;
-  author: string;
+  authorname: string;
   resourcename: string;
   url: string;
   description: string;
@@ -26,7 +26,7 @@ export default function SingleResource(
     <div className="SingleResource">
       <h3>{props.resource.resourcename}</h3>
       <p>Added on By {props.resource.postedbyuserid}</p>
-      <p>Author: {props.resource.author} </p>
+      <p>Author: {props.resource.authorname} </p>
       <p>URL: {props.resource.url} </p>
       <p>Description: {props.resource.description} </p>
       <p>Tags:{props.resource.tags} </p>
