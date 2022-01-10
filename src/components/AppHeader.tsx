@@ -1,14 +1,10 @@
 import NavBar from "./NavBar";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE } from "../utils/APIFragments";
 import axios from "axios";
 import getusername from "../utils/getusername";
-
-export interface IUser {
-  id: number;
-  name: string;
-  isFaculty: boolean;
-}
+import { IUser } from "../utils/Interfaces";
 
 interface AppHeaderProps {
   userId: string | null;
@@ -48,7 +44,7 @@ export default function AppHeader({
 
   useEffect(() => {
     axios
-      .get("https://resource-catalogue-be.herokuapp.com/users")
+      .get(`${API_BASE}/users`)
       .then(function (response) {
         setUserList(response.data.users);
       })

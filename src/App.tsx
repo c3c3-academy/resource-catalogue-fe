@@ -1,23 +1,36 @@
 import AppHeader from "./components/AppHeader";
 import MainContent from "./components/MainContent";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { ITag, IUser } from "./utils/Interfaces";
 import ToStudy from "./routes/ToStudy";
 import AddResources from "./routes/AddResources";
-import { useEffect, useState } from "react";
-import { IUser } from "./components/AppHeader";
-import axios from "axios";
+import { API_BASE } from "./utils/APIFragments";
 
 function App(): JSX.Element {
   const [userId, setUserId] = useState<string | null>(null);
   const [userList, setUserList] = useState<IUser[]>([]);
-
+  const [tags, setTags] = useState<ITag[]>([]);
   useEffect(() => {
     axios
-      .get("https://resource-catalogue-be.herokuapp.com/users")
+      .get(`${API_BASE}/users`)
       .then(function (response) {
         setUserList(response.data.users);
       })
       .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${API_BASE}/tags`)
+      .then(function (response) {
+        setTags(response.data.tags);
+      })
+      .catch(function (error) {
+        // handle error
         console.log(error);
       });
   }, []);
@@ -66,7 +79,7 @@ function App(): JSX.Element {
                   savedUserId={savedUserId ? savedUserId : ""}
                   setUserList={setUserList}
                 />
-                <AddResources />
+                <AddResources userId={userId} tags={tags} />
               </>
             }
           />
