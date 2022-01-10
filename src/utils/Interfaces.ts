@@ -14,3 +14,9 @@ export interface ITag {
   id: number;
   category: string;
 }
+
+export interface IUser {
+  id: number;
+  name: string;
+  isFaculty: boolean;
+}

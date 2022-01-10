@@ -1,4 +1,4 @@
-import { IUser } from "../components/AppHeader";
+import { IUser } from "./Interfaces";
 
 export default function getusername(
   userList: IUser[],

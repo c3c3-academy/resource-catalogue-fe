@@ -3,11 +3,10 @@ import MainContent from "./components/MainContent";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { ITag } from "./utils/Interfaces";
+import { ITag, IUser } from "./utils/Interfaces";
 import ToStudy from "./routes/ToStudy";
 import AddResources from "./routes/AddResources";
 import { API_BASE } from "./utils/APIFragments";
-import { IUser } from "./components/AppHeader";
 
 function App(): JSX.Element {
   const [userId, setUserId] = useState<string | null>(null);
@@ -15,15 +14,15 @@ function App(): JSX.Element {
   const [tags, setTags] = useState<ITag[]>([]);
   useEffect(() => {
     axios
-      .get("https://resource-catalogue-be.herokuapp.com/users")
+      .get(`${API_BASE}/users`)
       .then(function (response) {
         setUserList(response.data.users);
       })
       .catch(function (error) {
-console.log(error);
+        console.log(error);
       });
   }, []);
-  
+
   useEffect(() => {
     axios
       .get(`${API_BASE}/tags`)
@@ -35,7 +34,6 @@ console.log(error);
         console.log(error);
       });
   }, []);
-
 
   const retrieveSavedUser = () => {
     return localStorage.getItem("savedUserId");
@@ -50,7 +48,6 @@ console.log(error);
 
   console.log(`The page has rendered and this is the userId state: ${userId}`);
   console.log(`This is the item saved in memory: ${savedUserId}`);
-
 
   return (
     <>
@@ -82,13 +79,12 @@ console.log(error);
                   savedUserId={savedUserId ? savedUserId : ""}
                   setUserList={setUserList}
                 />
-                <AddResources userId={userId} tags={tags}/>
+                <AddResources userId={userId} tags={tags} />
               </>
             }
           />
           <Route
             path="/to-study-list"
-
             element={
               <>
                 <AppHeader

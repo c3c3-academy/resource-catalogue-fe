@@ -4,12 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { API_BASE } from "../utils/APIFragments";
 import axios from "axios";
 import getusername from "../utils/getusername";
-
-export interface IUser {
-  id: number;
-  name: string;
-  isFaculty: boolean;
-}
+import { IUser } from "../utils/Interfaces";
 
 interface AppHeaderProps {
   userId: string | null;

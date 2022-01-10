@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ITag } from "../utils/Interfaces";
 import { getTagId } from "../utils/getTagId";
-import NavBar from "../components/NavBar";
 import { API_BASE } from "../utils/APIFragments";
 import axios from "axios";
-interface IAddResource {
-  userId: number;
+interface AddResourceProps {
+  userId: string | null;
   tags: ITag[];
 }
 
-export default function AddResources(props: IAddResource): JSX.Element {
+export default function AddResources(props: AddResourceProps): JSX.Element {
   const [resourceName, setResourceName] = useState<string>("");
   const [authorName, setAuthorName] = useState<string>("");
   const [url, setURL] = useState<string>("");
@@ -48,11 +47,12 @@ export default function AddResources(props: IAddResource): JSX.Element {
     "Week 1: Workflows",
     "Week 2: TypeScript and Code Quality",
     "Week 3: React,HTML and CSS",
-    "Week 4: Consolidation ",
+    "Week 4: React and event handlers",
     "Week 5: React and useEffect",
-    "Week 6: Consolidation",
-    "Week 7: Node.js Express",
+    "Week 6: Consolidation: Frontend ",
+    "Week 7: Node.js and Express",
     "Week 8: SQL and Persistence",
+    "Week 9: Consolidation: Backend",
     "Other",
   ];
 
@@ -61,7 +61,6 @@ export default function AddResources(props: IAddResource): JSX.Element {
       {type}
     </option>
   ));
-
 
   /* eslint-disable  @typescript-eslint/no-unused-vars */
   const history = useNavigate();
@@ -92,7 +91,7 @@ export default function AddResources(props: IAddResource): JSX.Element {
         description: description,
         contenttype: contentType,
         contentstage: contentStage,
-        postedbyuserid: props.userId,
+        postedbyuserid: props.userId && parseInt(props.userId),
         isrecommended: recommend,
         reason: reason,
       })
