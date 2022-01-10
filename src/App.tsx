@@ -1,16 +1,18 @@
 import AppHeader from "./components/AppHeader";
 import MainContent from "./components/MainContent";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { ITag } from "./utils/Interfaces";
 import ToStudy from "./routes/ToStudy";
 import AddResources from "./routes/AddResources";
-import { useEffect, useState } from "react";
+import { API_BASE } from "./utils/APIFragments";
 import { IUser } from "./components/AppHeader";
-import axios from "axios";
 
 function App(): JSX.Element {
   const [userId, setUserId] = useState<string | null>(null);
   const [userList, setUserList] = useState<IUser[]>([]);
-
+  const [tags, setTags] = useState<ITag[]>([]);
   useEffect(() => {
     axios
       .get("https://resource-catalogue-be.herokuapp.com/users")
@@ -18,9 +20,22 @@ function App(): JSX.Element {
         setUserList(response.data.users);
       })
       .catch(function (error) {
+console.log(error);
+      });
+  }, []);
+  
+  useEffect(() => {
+    axios
+      .get(`${API_BASE}/tags`)
+      .then(function (response) {
+        setTags(response.data.tags);
+      })
+      .catch(function (error) {
+        // handle error
         console.log(error);
       });
   }, []);
+
 
   const retrieveSavedUser = () => {
     return localStorage.getItem("savedUserId");
@@ -35,6 +50,7 @@ function App(): JSX.Element {
 
   console.log(`The page has rendered and this is the userId state: ${userId}`);
   console.log(`This is the item saved in memory: ${savedUserId}`);
+
 
   return (
     <>
@@ -66,12 +82,13 @@ function App(): JSX.Element {
                   savedUserId={savedUserId ? savedUserId : ""}
                   setUserList={setUserList}
                 />
-                <AddResources />
+                <AddResources userId={userId} tags={tags}/>
               </>
             }
           />
           <Route
             path="/to-study-list"
+
             element={
               <>
                 <AppHeader

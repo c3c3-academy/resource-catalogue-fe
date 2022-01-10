@@ -1,6 +1,7 @@
 import NavBar from "./NavBar";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE } from "../utils/APIFragments";
 import axios from "axios";
 import getusername from "../utils/getusername";
 
@@ -48,7 +49,7 @@ export default function AppHeader({
 
   useEffect(() => {
     axios
-      .get("https://resource-catalogue-be.herokuapp.com/users")
+      .get(`${API_BASE}/users`)
       .then(function (response) {
         setUserList(response.data.users);
       })
