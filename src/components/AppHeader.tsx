@@ -1,5 +1,5 @@
 import NavBar from "./NavBar";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import getusername from "../utils/getusername";
@@ -25,14 +25,12 @@ export default function AppHeader({
   userList,
   savedUserId,
 }: AppHeaderProps): JSX.Element {
-  const [rerender, setRerender] = useState<boolean>(false);
-
   const navigate = useNavigate();
 
   const handleLogIn = (id: string | null) => {
     localStorage.setItem("savedUserId", `${id}`);
     setUserId(id);
-    setRerender(!rerender);
+    // setRerender(!rerender);
     console.log(`You are logged in as ${savedUserId}`);
     console.log(`The userId state is ${userId}`);
   };
@@ -42,7 +40,7 @@ export default function AppHeader({
     localStorage.removeItem("savedUserId");
     navigate(`/`);
     setUserId(null);
-    setRerender(!rerender);
+    // setRerender(!rerender);
 
     console.log(`${savedUserId} has logged out`);
     console.log(`${userId} is now the userId state`);
@@ -68,7 +66,7 @@ export default function AppHeader({
   return (
     <>
       <h1>Welcome to Cohort 3 Resource Catalogue</h1>
-      {savedUserId === null || userId === null ? (
+      {userId === null ? (
         <div className="LoginSelector">
           <select
             name="ChooseUser"
@@ -91,7 +89,7 @@ export default function AppHeader({
           <button onClick={handleLogOut}>Log out</button>
         </>
       )}
-      {savedUserId === null || userId === null ? (
+      {userId === null ? (
         <p>Log in to view more options.</p>
       ) : (
         <NavBar savedUserId={savedUserId} />
