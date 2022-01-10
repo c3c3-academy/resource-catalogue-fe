@@ -62,6 +62,7 @@ export default function AddResources(props: IAddResource): JSX.Element {
     </option>
   ));
 
+
   /* eslint-disable  @typescript-eslint/no-unused-vars */
   const history = useNavigate();
   /* eslint-enable  @typescript-eslint/no-unused-vars */
@@ -134,7 +135,6 @@ export default function AddResources(props: IAddResource): JSX.Element {
 
   return (
     <div>
-      <NavBar />
       <h1>Add Resource</h1>
 
       <form>

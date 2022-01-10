@@ -1,14 +1,22 @@
-export default function NavBar(): JSX.Element {
+interface NavBarProps {
+  savedUserId: string | null;
+}
+
+const baseURL = "https://c3c3-resource-catalogue.netlify.app/";
+
+// const baseURL = "http://localhost:3000/";
+
+export default function NavBar({ savedUserId }: NavBarProps): JSX.Element {
   return (
     <ul>
       <li>
-        <a href="http://localhost:3000/">Main Page</a>
+        <a href={`${baseURL}`}>Main Page</a>
       </li>
       <li>
-        <a href="http://localhost:3000/add-resources">Add Resource</a>
+        <a href={`${baseURL}add-resources`}>Add Resource</a>
       </li>
       <li>
-        <a href="http://localhost:3000/to-study-list">Study List</a>
+        <a href={`${baseURL}to-study-list`}>Study List</a>
       </li>
     </ul>
   );
