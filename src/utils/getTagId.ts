@@ -7,25 +7,22 @@ interface Props {
   tags: ITag[];
 }
 
-export function getTagId(props: Props): number {
-  let tagId = -1;
+export async function getTagId(props: Props): Promise<number> {
   const filtered = props.tags.filter(
-    (tag) => tag.category.toLowerCase === props.tagToCheck.toLowerCase
+    (tag) => tag.category.toLowerCase() === props.tagToCheck.toLowerCase()
   );
   if (filtered.length === 0) {
-    axios
+    return axios
       .post(`${API_BASE}/tags`, {
         category: props.tagToCheck,
       })
       .then(function (response) {
-        tagId = response.data.tags.id;
-        console.log(response);
+        return response.data.tags.id;
       })
       .catch(function (error) {
         console.log(error);
       });
   } else {
-    tagId = filtered[0].id;
+    return filtered[0].id;
   }
-  return tagId;
 }
