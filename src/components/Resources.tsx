@@ -1,10 +1,11 @@
 import SingleResource from "./SingleResource";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { containsTerm } from "../utils/containsTerm";
 
 interface Resource {
   id: string;
-  author: string;
+  authorname: string;
   resourcename: string;
   url: string;
   description: string;
@@ -16,7 +17,11 @@ interface Resource {
   creationdate: string;
   reason: string;
 }
-export default function Resources(): JSX.Element {
+
+interface ResourcesProps {
+  searchTerm: string;
+}
+export default function Resources({ searchTerm }: ResourcesProps): JSX.Element {
   const [resources, setResources] = useState<Resource[]>([]);
 
   const baseURL = "https://resource-catalogue-be.herokuapp.com/";
@@ -32,12 +37,33 @@ export default function Resources(): JSX.Element {
       });
   }, []);
 
+  const filteredResources = resources
+    .filter((element) => {
+      if (searchTerm === "") {
+        return element;
+      } else if (
+        containsTerm(searchTerm, element.resourcename) ||
+        containsTerm(searchTerm, element.authorname) ||
+        containsTerm(searchTerm, element.description) ||
+        containsTerm(searchTerm, element.reason)
+      ) {
+        return element;
+      } else {
+        return false;
+      }
+    })
+    .map((resource) => (
+      <SingleResource resource={resource} key={resource.id} />
+    ));
+
   return (
     <div className="Resources">
-      {/* {resources.length !== 0 && */}
-      {resources.map((resource) => (
-        <SingleResource resource={resource} key={resource.id} />
-      ))}
+      {filteredResources.length === 0 ? (
+        <p>No resources found.</p>
+      ) : (
+        <p>{filteredResources.length} resources found.</p>
+      )}
+      {filteredResources}
     </div>
   );
 }
