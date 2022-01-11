@@ -23,7 +23,7 @@ export default function Tags(): JSX.Element {
     <div className="Tags">
       <h2>Tags</h2>
       {/* {tags.map((tag) => ( */}
-        {/* // <SingleTag id={tag.id} category={tag.category} key={tag.id} />
+      {/* // <SingleTag id={tag.id} category={tag.category} key={tag.id} />
       // ))} */}
     </div>
   );

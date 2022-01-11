@@ -9,7 +9,6 @@ import AddResources from "./routes/AddResources";
 import { API_BASE } from "./utils/APIFragments";
 
 function App(): JSX.Element {
-
   const [searchTag, setSearchTag] = useState<string>("");
 
   const [userId, setUserId] = useState<string | null>(null);

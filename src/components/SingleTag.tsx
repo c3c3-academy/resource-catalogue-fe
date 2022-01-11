@@ -3,11 +3,9 @@ import { ITag } from "../utils/Interfaces";
 import { useState } from "react";
 
 interface singleTagProps {
-tags : ITag[];
-  setSearchTag : (searchTag: string | null) => void;
-  searchTag: string
-
-
+  tags: ITag[];
+  setSearchTag: (searchTag: string | null) => void;
+  searchTag: string;
 }
 // export default function SingleTag(props: singleTagProps) : JSX.Element {
 

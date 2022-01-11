@@ -6,12 +6,12 @@ import { IUser } from "../utils/Interfaces";
 
 interface MainContentProps {
   userList: IUser[];
-  searchTag:string
+  searchTag: string;
 }
 
 export default function MainContent({
   userList,
-  searchTag
+  searchTag,
 }: MainContentProps): JSX.Element {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
@@ -29,7 +29,11 @@ export default function MainContent({
             }}
           />
         </div>
-        <Resources userList={userList} searchTerm={searchTerm} searchTag={searchTag} />
+        <Resources
+          userList={userList}
+          searchTerm={searchTerm}
+          searchTag={searchTag}
+        />
       </div>
       <div className="right">
         <Tags />
