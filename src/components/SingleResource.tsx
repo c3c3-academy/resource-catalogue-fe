@@ -1,22 +1,8 @@
 import "../styles/SingleResource.css";
-
-interface Resource {
-  id: string;
-  authorname: string;
-  resourcename: string;
-  url: string;
-  description: string;
-  tags: string[] | string;
-  contenttype: string;
-  contentstage: string;
-  postedbyuserid: string;
-  isrecommended: string;
-  creationdate: string;
-  reason: string;
-}
+import { IResource } from "../utils/Interfaces";
 
 interface SingleResourceProps {
-  resource: Resource;
+  resource: IResource;
 }
 
 export default function SingleResource(
@@ -29,7 +15,7 @@ export default function SingleResource(
       <p>Author: {props.resource.authorname} </p>
       <p>URL: {props.resource.url} </p>
       <p>Description: {props.resource.description} </p>
-      <p>Tags:{props.resource.tags} </p>
+      <p>Tags:{props.resource.tags.join(", ")} </p>
       <p>Content Type: {props.resource.contenttype}</p>
       <p>Recommended Mark Stage: {props.resource.contentstage}</p>
       <p>is Recommended?:{props.resource.isrecommended} </p>

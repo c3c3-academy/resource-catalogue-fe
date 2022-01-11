@@ -4,7 +4,7 @@ export interface IResource {
   resourcename: string;
   url: string;
   description: string;
-  tags: string[] | string;
+  tags: string[];
   contenttype: string;
   contentstage: string;
   postedbyuserid: string;

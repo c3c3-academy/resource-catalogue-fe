@@ -16,7 +16,7 @@ export default function Resources({ searchTerm }: ResourcesProps): JSX.Element {
       await axios
         .get(API_BASE + "/resources")
         .then(function (response) {
-          const callBackFn = async (resource: IResource) => {
+          const addTagsToSingleResource = async (resource: IResource) => {
             const tags = await axios
               .get(`${API_BASE}/tags/${resource.id}`)
               .then((response) => {
@@ -25,16 +25,22 @@ export default function Resources({ searchTerm }: ResourcesProps): JSX.Element {
             resource.tags = tags;
             return resource;
           };
+          const getAllResourcesWithTags = async () => {
+            const returnValue: IResource[] = [];
 
-          const resourcesWithTags: IResource[] = [];
+            for (const resource of response.data.resources) {
+              const resourceWithTags = await addTagsToSingleResource(resource);
+              returnValue.push(resourceWithTags);
+            }
+            return returnValue;
+          };
 
-          response.data.resources.forEach(async (resource: IResource) => {
-            const resourceWithTags = resource;
-            resourcesWithTags.push(resourceWithTags);
-          });
+          const resourcesWithTags = getAllResourcesWithTags();
           return resourcesWithTags;
-          // setResources(resourcesWithTags);
         })
+
+        // setResources(resourcesWithTags);
+
         .then((resourcesWithTags) => {
           setResources(resourcesWithTags);
         })
@@ -66,40 +72,6 @@ export default function Resources({ searchTerm }: ResourcesProps): JSX.Element {
       <SingleResource resource={resource} key={resource.id} />
     ));
 
-  const allResourceElements = resources.map((resource) => (
-    <SingleResource resource={resource} key={resource.id} />
-  ));
-
-  console.log("resources:", resources);
-  console.log(
-    "filteredResourches before map",
-    resources.filter((element) => {
-      console.log(element);
-      if (searchTerm === "") {
-        return true;
-      } else if (
-        containsTerm(searchTerm, element.resourcename) ||
-        containsTerm(searchTerm, element.authorname) ||
-        containsTerm(searchTerm, element.description) ||
-        containsTerm(searchTerm, element.reason)
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    })
-  );
-  console.log("filteredresources after map", filteredResources);
-
-  // if (
-  //   searchTerm === "" &&
-  //   filteredResources.length === 0 &&
-  //   resources.length > 0
-  // ) {
-  //   setRerender(!rerender);
-  //   console.log("page re-rendered due to our if on line 111");
-  // }
-
   return (
     <div className="Resources">
       {filteredResources.length === 0 ? (
@@ -107,8 +79,7 @@ export default function Resources({ searchTerm }: ResourcesProps): JSX.Element {
       ) : (
         <p>{filteredResources.length} resources found.</p>
       )}
-      {/* {filteredResources} */}
-      {allResourceElements}
+      {filteredResources}
     </div>
   );
 }
