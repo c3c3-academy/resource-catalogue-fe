@@ -17,7 +17,7 @@ export default function SingleResource(
       <h3>{props.resource.resourcename}</h3>
       <p>
         Added on {getDate(props.resource.creationdate)} by{" "}
-        {getusername(props.userList, props.resource.postedbyuserid)}
+        {getusername(props.userList, parseInt(props.resource.postedbyuserid))}
       </p>
       <p>Author: {props.resource.authorname} </p>
       <p>URL: {props.resource.url} </p>
