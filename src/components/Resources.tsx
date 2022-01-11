@@ -3,12 +3,17 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { containsTerm } from "../utils/containsTerm";
 import { API_BASE } from "../utils/APIFragments";
-import { IResource } from "../utils/Interfaces";
+import { IResource, IUser } from "../utils/Interfaces";
 
 interface ResourcesProps {
   searchTerm: string;
+  userList: IUser[];
 }
-export default function Resources({ searchTerm }: ResourcesProps): JSX.Element {
+
+export default function Resources({
+  searchTerm,
+  userList,
+}: ResourcesProps): JSX.Element {
   const [resources, setResources] = useState<IResource[]>([]);
 
   useEffect(() => {
@@ -70,7 +75,11 @@ export default function Resources({ searchTerm }: ResourcesProps): JSX.Element {
       }
     })
     .map((resource) => (
-      <SingleResource resource={resource} key={resource.id} />
+      <SingleResource
+        userList={userList}
+        resource={resource}
+        key={resource.id}
+      />
     ));
 
   return (
