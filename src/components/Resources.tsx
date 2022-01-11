@@ -36,6 +36,7 @@ export default function Resources({ searchTerm }: ResourcesProps): JSX.Element {
           };
 
           const resourcesWithTags = getAllResourcesWithTags();
+
           return resourcesWithTags;
         })
 
