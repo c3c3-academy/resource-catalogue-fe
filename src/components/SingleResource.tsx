@@ -6,7 +6,7 @@ interface Resource {
   resourcename: string;
   url: string;
   description: string;
-  tags: string;
+  tags: string[] | string;
   contenttype: string;
   contentstage: string;
   postedbyuserid: string;
