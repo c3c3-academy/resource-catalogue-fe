@@ -2,29 +2,61 @@ import SingleResource from "./SingleResource";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { containsTerm } from "../utils/containsTerm";
+import { API_BASE } from "../utils/APIFragments";
 import { IResource, IUser } from "../utils/Interfaces";
 
 interface ResourcesProps {
   searchTerm: string;
   userList: IUser[];
 }
+
 export default function Resources({
   searchTerm,
   userList,
 }: ResourcesProps): JSX.Element {
   const [resources, setResources] = useState<IResource[]>([]);
 
-  const baseURL = "https://resource-catalogue-be.herokuapp.com/";
-
   useEffect(() => {
-    axios
-      .get(baseURL + "resources")
-      .then(function (response) {
-        setResources(response.data.resources);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    const fn = async () => {
+      await axios
+        .get(API_BASE + "/resources")
+        .then(function (response) {
+          const addTagsToSingleResource = async (resource: IResource) => {
+            const tags = await axios
+              .get(`${API_BASE}/tags/${resource.id}`)
+              .then((response) => {
+                return response.data.tags;
+              });
+            resource.tags = tags;
+            return resource;
+          };
+          const getAllResourcesWithTags = async () => {
+            const returnValue: IResource[] = [];
+
+            for (const resource of response.data.resources) {
+              const resourceWithTags = await addTagsToSingleResource(resource);
+              returnValue.push(resourceWithTags);
+            }
+            return returnValue;
+          };
+
+          const resourcesWithTags = getAllResourcesWithTags();
+
+          return resourcesWithTags;
+        })
+
+        // setResources(resourcesWithTags);
+
+        .then((resourcesWithTags) => {
+          setResources(resourcesWithTags);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
+    fn();
+
+    // eslint-disable-next-line
   }, []);
 
   const filteredResources = resources
