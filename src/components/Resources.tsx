@@ -2,27 +2,17 @@ import SingleResource from "./SingleResource";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { containsTerm } from "../utils/containsTerm";
-
-interface Resource {
-  id: string;
-  authorname: string;
-  resourcename: string;
-  url: string;
-  description: string;
-  tags: string;
-  contenttype: string;
-  contentstage: string;
-  postedbyuserid: string;
-  isrecommended: string;
-  creationdate: string;
-  reason: string;
-}
+import { IResource, IUser } from "../utils/Interfaces";
 
 interface ResourcesProps {
   searchTerm: string;
+  userList: IUser[];
 }
-export default function Resources({ searchTerm }: ResourcesProps): JSX.Element {
-  const [resources, setResources] = useState<Resource[]>([]);
+export default function Resources({
+  searchTerm,
+  userList,
+}: ResourcesProps): JSX.Element {
+  const [resources, setResources] = useState<IResource[]>([]);
 
   const baseURL = "https://resource-catalogue-be.herokuapp.com/";
 
@@ -53,7 +43,11 @@ export default function Resources({ searchTerm }: ResourcesProps): JSX.Element {
       }
     })
     .map((resource) => (
-      <SingleResource resource={resource} key={resource.id} />
+      <SingleResource
+        userList={userList}
+        resource={resource}
+        key={resource.id}
+      />
     ));
 
   return (

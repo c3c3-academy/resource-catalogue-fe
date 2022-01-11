@@ -26,7 +26,6 @@ export default function AppHeader({
   const handleLogIn = (id: string | null) => {
     localStorage.setItem("savedUserId", `${id}`);
     setUserId(id);
-    // setRerender(!rerender);
     console.log(`You are logged in as ${savedUserId}`);
     console.log(`The userId state is ${userId}`);
   };
@@ -36,7 +35,6 @@ export default function AppHeader({
     localStorage.removeItem("savedUserId");
     navigate(`/`);
     setUserId(null);
-    // setRerender(!rerender);
 
     console.log(`${savedUserId} has logged out`);
     console.log(`${userId} is now the userId state`);

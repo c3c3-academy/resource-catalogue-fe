@@ -1,13 +1,15 @@
 export interface IResource {
-  resourceName: string;
-  authorName: string;
+  id: number;
+  resourcename: string;
+  authorname: string;
   url: string;
   description: string;
-  contentType: string;
-  contentStage: string;
-  postedByUserId: number;
-  isRecommend: string;
+  contenttype: string;
+  contentstage: string;
+  postedbyuserid: number;
+  isrecommended: string;
   reason: string;
+  creationdate: string;
 }
 
 export interface ITag {
