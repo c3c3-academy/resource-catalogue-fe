@@ -16,7 +16,7 @@ export default function Resources({ searchTerm }: ResourcesProps): JSX.Element {
       await axios
         .get(API_BASE + "/resources")
         .then(function (response) {
-          const callBackFn = async (resource: IResource) => {
+          const addTagsToResource = async (resource: IResource) => {
             const tags = await axios
               .get(`${API_BASE}/tags/${resource.id}`)
               .then((response) => {
@@ -29,7 +29,7 @@ export default function Resources({ searchTerm }: ResourcesProps): JSX.Element {
           const resourcesWithTags: IResource[] = [];
 
           response.data.resources.forEach(async (resource: IResource) => {
-            const resourceWithTags = resource;
+            const resourceWithTags = await addTagsToResource(resource);
             resourcesWithTags.push(resourceWithTags);
           });
           return resourcesWithTags;
