@@ -30,7 +30,6 @@ function App(): JSX.Element {
         setTags(response.data.tags);
       })
       .catch(function (error) {
-        // handle error
         console.log(error);
       });
   }, []);
@@ -43,7 +42,6 @@ function App(): JSX.Element {
 
   useEffect(() => {
     setUserId(savedUserId ? savedUserId : null);
-    console.log("useEffect was called");
   }, [savedUserId]);
 
   console.log(`The page has rendered and this is the userId state: ${userId}`);

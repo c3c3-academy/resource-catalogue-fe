@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ITag } from "../utils/Interfaces";
-import { getTagId } from "../utils/getTagId";
 import { API_BASE } from "../utils/APIFragments";
 import axios from "axios";
+import { getTagId } from "../utils/getTagId";
 interface AddResourceProps {
   userId: string | null;
   tags: ITag[];
@@ -68,20 +68,6 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
 
   const handleSubmit = async () => {
     let resourceId: number;
-    console.log("button");
-    console.log(API_BASE);
-    console.log(props.tags);
-    console.log({
-      resourcename: resourceName,
-      authorname: authorName,
-      url: url,
-      description: description,
-      contenttype: contentType,
-      contentstage: contentStage,
-      postedbyuserid: props.userId,
-      isrecommended: recommend,
-      reason: reason,
-    });
 
     await axios
       .post(`${API_BASE}/resources`, {
@@ -96,7 +82,6 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
         reason: reason,
       })
       .then(function (response) {
-        console.log(response);
         resourceId = response.data.resourceAdded.id;
       })
       .catch(function (error) {
@@ -104,21 +89,16 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
       });
 
     const tagList = enteredTags.split(", ");
-    tagList.forEach((tag) => {
-      const tagId = getTagId({ tagToCheck: tag, tags: props.tags });
-      if (tagId !== -1) {
-        axios
-          .post(`${API_BASE}/tagrelations`, {
-            tagid: tagId,
-            resourceid: resourceId,
-          })
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }
+    tagList.forEach(async (tag) => {
+      const tagId = await getTagId({ tagToCheck: tag, tags: props.tags });
+      await axios
+        .post(`${API_BASE}/tagrelations`, {
+          tagid: tagId,
+          resourceid: resourceId,
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     });
 
     setResourceName("");
