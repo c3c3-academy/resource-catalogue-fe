@@ -1,6 +1,6 @@
 import "../styles/SingleResource.css";
 import { getDate } from "../utils/getDate";
-import getusername from "../utils/getusername";
+import getUserName from "../utils/getUserName";
 import { IResource, IUser } from "../utils/Interfaces";
 import { isRecommended } from "../utils/isRecommended";
 
@@ -17,7 +17,7 @@ export default function SingleResource(
       <h3>{props.resource.resourcename}</h3>
       <p>
         Added on {getDate(props.resource.creationdate)} by{" "}
-        {getusername(props.userList, props.resource.postedbyuserid)}
+        {getUserName(props.userList, props.resource.postedbyuserid)}
       </p>
       <p>Author: {props.resource.authorname} </p>
       <p>URL: {props.resource.url} </p>

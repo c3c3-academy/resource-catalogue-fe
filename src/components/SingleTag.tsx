@@ -2,13 +2,19 @@ import "../styles/SingleTag.css";
 import { ITag } from "../utils/Interfaces";
 import { useState } from "react";
 
-export default function SingleTag(props: ITag): JSX.Element {
-  const [searchTag, setSearchTag] = useState<string>("");
+interface singleTagProps {
+tags : ITag[];
+  setSearchTag : (searchTag: string | null) => void;
+  searchTag: string
 
-  const handleTagFilter = () => {
-    setSearchTag(props.category);
-  };
 
-  console.log(searchTag);
-  return <button onClick={handleTagFilter}>{props.category}</button>;
 }
+// export default function SingleTag(props: singleTagProps) : JSX.Element {
+
+//   const handleTagFilter = () => {
+//     props.setSearchTag(props.category);
+//   };
+
+//   console.log(props.searchTag);
+//   return <button onClick={handleTagFilter}>{props.category}</button>;
+// }

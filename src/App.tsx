@@ -9,6 +9,9 @@ import AddResources from "./routes/AddResources";
 import { API_BASE } from "./utils/APIFragments";
 
 function App(): JSX.Element {
+
+  const [searchTag, setSearchTag] = useState<string>("");
+
   const [userId, setUserId] = useState<string | null>(null);
   const [userList, setUserList] = useState<IUser[]>([]);
   const [tags, setTags] = useState<ITag[]>([]);
@@ -64,7 +67,7 @@ function App(): JSX.Element {
                   savedUserId={savedUserId ? savedUserId : ""}
                   setUserList={setUserList}
                 />
-                <MainContent userList={userList} />
+                <MainContent userList={userList} searchTag={searchTag} />
               </>
             }
           />

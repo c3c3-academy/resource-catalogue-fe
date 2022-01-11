@@ -7,10 +7,12 @@ import { IResource, IUser } from "../utils/Interfaces";
 interface ResourcesProps {
   searchTerm: string;
   userList: IUser[];
+  searchTag : string
 }
 export default function Resources({
   searchTerm,
   userList,
+  searchTag
 }: ResourcesProps): JSX.Element {
   const [resources, setResources] = useState<IResource[]>([]);
 
@@ -35,7 +37,7 @@ export default function Resources({
         containsTerm(searchTerm, element.resourcename) ||
         containsTerm(searchTerm, element.authorname) ||
         containsTerm(searchTerm, element.description) ||
-        containsTerm(searchTerm, element.reason)
+        containsTerm(searchTerm, element.reason) || containsTerm(searchTerm, searchTag)
       ) {
         return element;
       } else {

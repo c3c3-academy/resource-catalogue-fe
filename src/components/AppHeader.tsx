@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE } from "../utils/APIFragments";
 import axios from "axios";
-import getusername from "../utils/getusername";
+import getUserName from "../utils/getUserName";
 import { IUser } from "../utils/Interfaces";
 
 interface AppHeaderProps {
@@ -76,7 +76,7 @@ export default function AppHeader({
           {userList[0] && (
             <p>
               You are now logged in as
-              {" " + getusername(userList, parseInt(savedUserId))}
+              {" " + getUserName(userList, parseInt(savedUserId))}
             </p>
           )}
 

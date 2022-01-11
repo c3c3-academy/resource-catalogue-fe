@@ -1,6 +1,6 @@
 import { IUser } from "./Interfaces";
 
-export default function getusername(
+export default function getUserName(
   userList: IUser[],
   idToCheck: number
 ): string {
