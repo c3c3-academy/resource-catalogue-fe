@@ -55,8 +55,6 @@ export default function Resources({
         });
     };
     fn();
-
-    // eslint-disable-next-line
   }, []);
 
   const filteredResources = resources
