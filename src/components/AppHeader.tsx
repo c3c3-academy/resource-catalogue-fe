@@ -76,7 +76,9 @@ export default function AppHeader({
             </p>
           )}
 
-          <button onClick={handleLogOut}>Log out</button>
+          <button className="LogOut" onClick={handleLogOut}>
+            Log out
+          </button>
         </>
       )}
       {userId === null ? (
