@@ -71,7 +71,7 @@ export default function AppHeader({
           {userList[0] && (
             <p>
               You are now logged in as
-              {" " + getusername(userList, parseInt(savedUserId))}
+              {" " + getusername(userList, savedUserId)}
             </p>
           )}
 
