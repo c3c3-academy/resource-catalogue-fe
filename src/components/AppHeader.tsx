@@ -58,6 +58,7 @@ export default function AppHeader({
       {userId === null ? (
         <div className="LoginSelector">
           <select
+            className="userDropDown"
             name="ChooseUser"
             id="ChooseUser"
             onChange={(e) => handleLogIn(e.target.value)}
