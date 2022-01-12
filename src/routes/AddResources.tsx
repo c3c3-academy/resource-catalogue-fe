@@ -10,6 +10,8 @@ interface AddResourceProps {
 }
 
 export default function AddResources(props: AddResourceProps): JSX.Element {
+  useNavigate();
+
   const [resourceName, setResourceName] = useState<string>("");
   const [authorName, setAuthorName] = useState<string>("");
   const [url, setURL] = useState<string>("");
@@ -61,10 +63,6 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
       {type}
     </option>
   ));
-
-  /* eslint-disable  @typescript-eslint/no-unused-vars */
-  const history = useNavigate();
-  /* eslint-enable  @typescript-eslint/no-unused-vars */
 
   const handleSubmit = async () => {
     let resourceId: number;

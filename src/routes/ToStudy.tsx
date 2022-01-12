@@ -6,9 +6,7 @@ interface ToStudyProps {
 }
 
 const ToStudy = ({ savedUserId }: ToStudyProps): JSX.Element => {
-  /* eslint-disable  @typescript-eslint/no-unused-vars */
-  const history = useNavigate();
-  /* eslint-enable  @typescript-eslint/no-unused-vars */
+  useNavigate();
 
   return (
     <div>
