@@ -2,7 +2,7 @@ import "../styles/MainContent.css";
 import Resources from "./Resources";
 import Tags from "./Tags";
 import { useState } from "react";
-import { IUser } from "../utils/Interfaces";
+import { ITag, IUser } from "../utils/Interfaces";
 
 interface MainContentProps {
   userList: IUser[];
@@ -12,6 +12,7 @@ export default function MainContent({
   userList,
 }: MainContentProps): JSX.Element {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [selectedTags, setSelectedTags] = useState<ITag[]>([]);
 
   return (
     <div className="MainContent">
@@ -27,10 +28,14 @@ export default function MainContent({
             }}
           />
         </div>
-        <Resources userList={userList} searchTerm={searchTerm} />
+        <Resources
+          userList={userList}
+          searchTerm={searchTerm}
+          selectedTags={selectedTags}
+        />
       </div>
       <div className="right">
-        <Tags />
+        <Tags selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
       </div>
     </div>
   );

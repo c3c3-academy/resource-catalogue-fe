@@ -1,0 +1,4 @@
+.selectedTag {
+  display: inline-block;
+  background-color: yellow;
+}
