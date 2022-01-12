@@ -54,7 +54,7 @@ export default function AppHeader({
 
   return (
     <>
-      <h1>Welcome to Cohort 3 Resource Catalogue</h1>
+      <h1 className="welcomeText">Welcome to Cohort 3 Resource Catalogue</h1>
       {userId === null ? (
         <div className="LoginSelector">
           <select

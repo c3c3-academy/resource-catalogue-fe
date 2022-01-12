@@ -7,11 +7,14 @@ describe("all resources", () => {
     cy.visit("http://localhost:3000");
   });
 
-  it("displays sixteen resource items by default", () => {
+  it("displays more than zero resources by default", () => {
     // We use the `cy.get()` command to get all elements that match the selector.
     // Then, we use `should` to assert that there are two matched items,
     // which are the two default items.
-    cy.get(".SingleResource").should("have.length", 16);
+    cy.get(".SingleResource").should(($input) => {
+      expect($input).to.not.have.length(0);
+    });
+    cy.get(".SearchInput").click();
 
     cy.get(".SearchInput").click().type("react");
 
@@ -22,6 +25,18 @@ describe("all resources", () => {
     // We use the `cy.get()` command to get all elements that match the selector.
     // Then, we use `should` to assert that there are two matched items,
     // which are the two default items.
-    cy.get(".LoginSelector").children().should("have.length", 32);
+
+    cy.get(".userDropDown").should("exist");
+    cy.get(".LoginSelector").click();
+    cy.get(".userDropDown").children().should("have.length", 32);
+  });
+
+  it("Appheader h1 has correct text", () => {
+    // We use the `cy.get()` command to get all elements that match the selector.
+    // Then, we use `should` to assert that there are two matched items,
+    // which are the two default items.
+
+    cy.get(".welcomeText").should("exist");
+    cy.get(".welcomeText").contains("Welcome");
   });
 });
