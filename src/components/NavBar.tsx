@@ -8,7 +8,7 @@ const baseURL = "http://localhost:3000/";
 
 export default function NavBar({ savedUserId }: NavBarProps): JSX.Element {
   return (
-    <ul>
+    <ul className="nav-bar">
       <li>
         <a href={`${baseURL}`}>Main Page</a>
       </li>
