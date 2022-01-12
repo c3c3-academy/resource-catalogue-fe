@@ -3,16 +3,18 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { containsTerm } from "../utils/containsTerm";
 import { API_BASE } from "../utils/APIFragments";
-import { IResource, IUser } from "../utils/Interfaces";
+import { IResource, ITag, IUser } from "../utils/Interfaces";
 
 interface ResourcesProps {
   searchTerm: string;
+  selectedTags: ITag[];
   userList: IUser[];
 }
 
 export default function Resources({
   searchTerm,
   userList,
+  selectedTags,
 }: ResourcesProps): JSX.Element {
   const [resources, setResources] = useState<IResource[]>([]);
 
@@ -44,9 +46,6 @@ export default function Resources({
 
           return resourcesWithTags;
         })
-
-        // setResources(resourcesWithTags);
-
         .then((resourcesWithTags) => {
           setResources(resourcesWithTags);
         })
@@ -65,10 +64,23 @@ export default function Resources({
         containsTerm(searchTerm, element.resourcename) ||
         containsTerm(searchTerm, element.authorname) ||
         containsTerm(searchTerm, element.description) ||
-        containsTerm(searchTerm, element.reason)
+        containsTerm(searchTerm, element.reason) ||
+        containsTerm(searchTerm, element.tags.join(" "))
       ) {
         return element;
       } else {
+        return false;
+      }
+    })
+    .filter((element) => {
+      if (selectedTags.length === 0) {
+        return element;
+      } else {
+        for (const tag of selectedTags) {
+          if (containsTerm(tag.category, element.tags.join(" "))) {
+            return element;
+          }
+        }
         return false;
       }
     })

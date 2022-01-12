@@ -1,4 +1,4 @@
-import "../styles/SingleTag.css";
+import "../styles/SingleSearchTag.css";
 import { ITag } from "../utils/Interfaces";
 
 interface SingleTagProps {
@@ -16,15 +16,15 @@ export default function SingleTag({
   notSelectedTags,
   setNotSelectedTags,
 }: SingleTagProps): JSX.Element {
-  const addSearchTag = () => {
-    setSelectedTags([...selectedTags, tag]);
-    setNotSelectedTags(
-      notSelectedTags.filter((tagElement) => tagElement.id !== tag.id)
+  const removeSearchTag = () => {
+    setNotSelectedTags([...notSelectedTags, tag]);
+    setSelectedTags(
+      selectedTags.filter((tagElement) => tagElement.id !== tag.id)
     );
   };
 
   return (
-    <button className="notSelectedTag" onClick={addSearchTag}>
+    <button className={"selectedTag"} onClick={removeSearchTag}>
       {tag.category}
     </button>
   );
