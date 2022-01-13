@@ -7,7 +7,7 @@ import { isRecommended } from "../utils/isRecommended";
 interface SingleResourceProps {
   resource: IResource;
   userList: IUser[];
-  userId: string | null;
+  userId: string;
 }
 
 export default function SingleResourceLoggedIn(
