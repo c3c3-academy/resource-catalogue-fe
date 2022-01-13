@@ -1,4 +1,4 @@
-.SingleResource {
+.SingleResourceLoggedIn {
   padding: 10px 8px;
   margin: 10px 15px;
   border: 1px solid #00695c;
@@ -10,7 +10,7 @@
   display: flex;
 }
 
-.SingleResource h3 {
+.SingleResourceLoggedIn h3 {
   flex: 70%;
 }
 

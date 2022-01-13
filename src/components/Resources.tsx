@@ -1,4 +1,5 @@
 import SingleResource from "./SingleResource";
+import SingleResourceLoggedIn from "./SingleResourceLoggedIn";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { containsTerm } from "../utils/containsTerm";
@@ -9,12 +10,14 @@ interface ResourcesProps {
   searchTerm: string;
   selectedTags: ITag[];
   userList: IUser[];
+  userId: string | null;
 }
 
 export default function Resources({
   searchTerm,
   userList,
   selectedTags,
+  userId,
 }: ResourcesProps): JSX.Element {
   const [resources, setResources] = useState<IResource[]>([]);
 
@@ -84,13 +87,22 @@ export default function Resources({
         return false;
       }
     })
-    .map((resource) => (
-      <SingleResource
-        userList={userList}
-        resource={resource}
-        key={resource.id}
-      />
-    ));
+    .map((resource) => {
+      return userId === null ? (
+        <SingleResource
+          userList={userList}
+          resource={resource}
+          key={resource.id}
+        />
+      ) : (
+        <SingleResourceLoggedIn
+          userList={userList}
+          resource={resource}
+          key={resource.id}
+          userId={userId}
+        />
+      );
+    });
 
   return (
     <div className="Resources">
