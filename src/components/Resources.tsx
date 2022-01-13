@@ -1,7 +1,7 @@
 import SingleResource from "./SingleResource";
 import SingleResourceLoggedIn from "./SingleResourceLoggedIn";
 import { containsTerm } from "../utils/containsTerm";
-import { IResource, ITag, IUser } from "../utils/Interfaces";
+import { IResource, ITag, IToStudy, IUser } from "../utils/Interfaces";
 
 interface ResourcesProps {
   searchTerm: string;
@@ -9,6 +9,7 @@ interface ResourcesProps {
   userList: IUser[];
   userId: string | null;
   resources: IResource[];
+  toStudyIds: IToStudy[];
 }
 
 export default function Resources({
@@ -17,6 +18,7 @@ export default function Resources({
   selectedTags,
   userId,
   resources,
+  toStudyIds,
 }: ResourcesProps): JSX.Element {
   const filteredResources = resources
     .filter((element) => {
@@ -59,6 +61,7 @@ export default function Resources({
           resource={resource}
           key={resource.id}
           userId={userId}
+          toStudyIds={toStudyIds}
         />
       );
     });

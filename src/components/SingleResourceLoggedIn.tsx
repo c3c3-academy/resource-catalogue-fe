@@ -1,18 +1,26 @@
 import "../styles/SingleResourceLoggedIn.css";
 import { getDate } from "../utils/getDate";
 import getusername from "../utils/getusername";
-import { IResource, IUser } from "../utils/Interfaces";
+import { inStudyList } from "../utils/inStudyList";
+import { IResource, IToStudy, IUser } from "../utils/Interfaces";
 import { isRecommended } from "../utils/isRecommended";
 
 interface SingleResourceProps {
   resource: IResource;
   userList: IUser[];
   userId: string | null;
+  toStudyIds: IToStudy[];
 }
 
 export default function SingleResourceLoggedIn(
   props: SingleResourceProps
 ): JSX.Element {
+  const buttonElement = inStudyList(
+    props.resource.id,
+    props.userId,
+    props.toStudyIds
+  );
+
   return (
     <div className="SingleResourceLoggedIn">
       <h3>{props.resource.resourcename}</h3>

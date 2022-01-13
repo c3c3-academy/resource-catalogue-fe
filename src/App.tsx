@@ -3,7 +3,7 @@ import MainContent from "./components/MainContent";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { IResource, ITag, IUser } from "./utils/Interfaces";
+import { IResource, ITag, IToStudy, IUser } from "./utils/Interfaces";
 import ToStudy from "./routes/ToStudy";
 import AddResources from "./routes/AddResources";
 import { API_BASE } from "./utils/APIFragments";
@@ -13,6 +13,21 @@ function App(): JSX.Element {
   const [userList, setUserList] = useState<IUser[]>([]);
   const [tags, setTags] = useState<ITag[]>([]);
   const [resources, setResources] = useState<IResource[]>([]);
+  const [toStudyIds, setToStudyIds] = useState<IToStudy[]>([]);
+
+  useEffect(() => {
+    if (userId !== null) {
+      axios
+        .get(`${API_BASE}/tostudy/${userId}`)
+        .then((response) => {
+          console.log(response.data.tostudylist);
+          setToStudyIds(response.data.tostudylist);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  }, [userId]);
 
   useEffect(() => {
     const fn = async () => {
@@ -106,6 +121,7 @@ function App(): JSX.Element {
                   userList={userList}
                   userId={userId}
                   resources={resources}
+                  toStudyIds={toStudyIds}
                 />
               </>
             }
@@ -140,6 +156,7 @@ function App(): JSX.Element {
                   savedUserId={savedUserId}
                   resources={resources}
                   userList={userList}
+                  toStudyIds={toStudyIds}
                 />
               </>
             }
