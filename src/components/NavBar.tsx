@@ -2,9 +2,9 @@ interface NavBarProps {
   savedUserId: string | null;
 }
 
-// const baseURL = "https://c3c3-resource-catalogue.netlify.app/";
+const baseURL = "https://c3c3-resource-catalogue.netlify.app/";
 
-const baseURL = "http://localhost:3000/";
+// const baseURL = "http://localhost:3000/";
 
 export default function NavBar({ savedUserId }: NavBarProps): JSX.Element {
   return (
