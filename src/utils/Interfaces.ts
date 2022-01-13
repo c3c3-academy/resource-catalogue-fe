@@ -1,5 +1,5 @@
 export interface IResource {
-  id: string;
+  id: number;
   authorname: string;
   resourcename: string;
   url: string;
@@ -22,4 +22,10 @@ export interface IUser {
   id: number;
   name: string;
   isFaculty: boolean;
+}
+
+export interface IToStudy {
+  id: number;
+  userid: number;
+  resourceid: number;
 }
