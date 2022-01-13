@@ -62,7 +62,7 @@ function App(): JSX.Element {
                   savedUserId={savedUserId ? savedUserId : ""}
                   setUserList={setUserList}
                 />
-                <MainContent userList={userList} />
+                <MainContent userList={userList} userId={userId} />
               </>
             }
           />

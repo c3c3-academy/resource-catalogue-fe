@@ -6,10 +6,12 @@ import { ITag, IUser } from "../utils/Interfaces";
 
 interface MainContentProps {
   userList: IUser[];
+  userId: string | null;
 }
 
 export default function MainContent({
   userList,
+  userId,
 }: MainContentProps): JSX.Element {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedTags, setSelectedTags] = useState<ITag[]>([]);
@@ -32,6 +34,7 @@ export default function MainContent({
           userList={userList}
           searchTerm={searchTerm}
           selectedTags={selectedTags}
+          userId={userId}
         />
       </div>
       <div className="right">
