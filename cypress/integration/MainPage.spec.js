@@ -11,8 +11,9 @@ describe("all resources", () => {
     // We use the `cy.get()` command to get all elements that match the selector.
     // Then, we use `should` to assert that there are two matched items,
     // which are the two default items.
+
     cy.get(".SingleResource").should(($input) => {
-      expect($input).to.not.have.length(0);
+      expect($input).to.have.length.of.at.least(1);
     });
     cy.get(".SearchInput").click();
 
