@@ -3,6 +3,7 @@ import { getDate } from "../utils/getDate";
 import getusername from "../utils/getusername";
 import { IResource, IUser } from "../utils/Interfaces";
 import { isRecommended } from "../utils/isRecommended";
+import RatingAndComment from "./RatingAndComment";
 
 interface SingleResourceProps {
   resource: IResource;
@@ -28,6 +29,7 @@ export default function SingleResourceLoggedIn(
       <p>Recommended Mark Stage: {props.resource.contentstage}</p>
       <p>Recommendation: {isRecommended(props.resource.isrecommended)} </p>
       <p>Reason: {props.resource.reason} </p>
+      <RatingAndComment resourceId={props.resource.id} userId={props.userId} />
     </div>
   );
 }
