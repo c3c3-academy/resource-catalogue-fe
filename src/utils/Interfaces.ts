@@ -23,3 +23,9 @@ export interface IUser {
   name: string;
   isFaculty: boolean;
 }
+
+export interface IToStudy {
+  id: number;
+  userid: number;
+  resourceid: number;
+}

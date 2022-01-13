@@ -11,6 +11,7 @@ interface ResourcesProps {
   selectedTags: ITag[];
   userList: IUser[];
   userId: string | null;
+  resources: IResource[];
 }
 
 export default function Resources({
@@ -18,47 +19,8 @@ export default function Resources({
   userList,
   selectedTags,
   userId,
+  resources,
 }: ResourcesProps): JSX.Element {
-  const [resources, setResources] = useState<IResource[]>([]);
-
-  useEffect(() => {
-    const fn = async () => {
-      await axios
-        .get(API_BASE + "/resources")
-        .then(function (response) {
-          const addTagsToSingleResource = async (resource: IResource) => {
-            const tags = await axios
-              .get(`${API_BASE}/tags/${resource.id}`)
-              .then((response) => {
-                return response.data.tags;
-              });
-            resource.tags = tags;
-            return resource;
-          };
-          const getAllResourcesWithTags = async () => {
-            const returnValue: IResource[] = [];
-
-            for (const resource of response.data.resources) {
-              const resourceWithTags = await addTagsToSingleResource(resource);
-              returnValue.push(resourceWithTags);
-            }
-            return returnValue;
-          };
-
-          const resourcesWithTags = getAllResourcesWithTags();
-
-          return resourcesWithTags;
-        })
-        .then((resourcesWithTags) => {
-          setResources(resourcesWithTags);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    };
-    fn();
-  }, []);
-
   const filteredResources = resources
     .filter((element) => {
       if (searchTerm === "") {
