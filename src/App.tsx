@@ -136,7 +136,11 @@ function App(): JSX.Element {
                   savedUserId={savedUserId ? savedUserId : ""}
                   setUserList={setUserList}
                 />
-                <ToStudy savedUserId={savedUserId} resources={resources} />
+                <ToStudy
+                  savedUserId={savedUserId}
+                  resources={resources}
+                  userList={userList}
+                />
               </>
             }
           />

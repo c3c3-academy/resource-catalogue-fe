@@ -1,9 +1,6 @@
 import SingleResource from "./SingleResource";
 import SingleResourceLoggedIn from "./SingleResourceLoggedIn";
-import { useState, useEffect } from "react";
-import axios from "axios";
 import { containsTerm } from "../utils/containsTerm";
-import { API_BASE } from "../utils/APIFragments";
 import { IResource, ITag, IUser } from "../utils/Interfaces";
 
 interface ResourcesProps {

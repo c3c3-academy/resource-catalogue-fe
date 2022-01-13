@@ -1,5 +1,5 @@
 export interface IResource {
-  id: string;
+  id: number;
   authorname: string;
   resourcename: string;
   url: string;
