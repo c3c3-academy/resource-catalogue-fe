@@ -80,6 +80,7 @@ export default function SingleResourceLoggedIn(
       <p>Recommended Mark Stage: {props.resource.contentstage}</p>
       <p>Recommendation: {isRecommended(props.resource.isrecommended)} </p>
       <p>Reason: {props.resource.reason} </p>
+      {buttonElement}
       <RatingAndComment
         resourceId={props.resource.id}
         userId={props.userId}
