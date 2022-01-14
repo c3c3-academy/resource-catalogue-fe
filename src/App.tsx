@@ -3,7 +3,7 @@ import MainContent from "./components/MainContent";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { IResource, ITag, IToStudy, IUser } from "./utils/Interfaces";
+import { IInteraction, IResource, ITag, IToStudy, IUser } from "./utils/Interfaces";
 import ToStudy from "./routes/ToStudy";
 import AddResources from "./routes/AddResources";
 import { API_BASE } from "./utils/APIFragments";

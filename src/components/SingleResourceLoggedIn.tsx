@@ -1,7 +1,7 @@
 import "../styles/SingleResourceLoggedIn.css";
 import { getDate } from "../utils/getDate";
 import getusername from "../utils/getusername";
-import { IResource, IToStudy, IUser } from "../utils/Interfaces";
+import { IInteraction, IResource, IToStudy, IUser } from "../utils/Interfaces";
 import { isRecommended } from "../utils/isRecommended";
 import axios from "axios";
 import { API_BASE } from "../utils/APIFragments";
@@ -24,6 +24,23 @@ export default function SingleResourceLoggedIn(
   const [commentAdded, setCommentAdded] = useState<boolean>(false);
   const [isInStudyList, setIsInStudyList] = useState<boolean>();
   const [buttonClicked, setButtonClicked] = useState<boolean>(false);
+  const [interactions, setInteractions] = useState<IInteraction[]>([]);
+  const [getUpdatedInteractions, setGetUpdatedInteractions] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (props.userId !== null) {
+      axios
+        .get(`${API_BASE}/interactionsbyuser/${props.userId}`)
+        .then((response) => {
+          console.log(response.data.interactions);
+          setInteractions(response.data.interactions);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  }, [props.userId, getUpdatedInteractions]);
+
 
   useEffect(() => {
     setIsInStudyList(

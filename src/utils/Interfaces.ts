@@ -29,3 +29,11 @@ export interface IToStudy {
   userid: number;
   resourceid: number;
 }
+
+export interface IInteraction {
+  id: number;
+  userid: number;
+  resourceid: number;
+  rating: number;
+  comment: string;
+}
