@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "../styles/SingleResourceLoggedIn.css";
 import { getDate } from "../utils/getDate";
 import getusername from "../utils/getusername";
