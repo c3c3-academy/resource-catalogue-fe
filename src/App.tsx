@@ -160,6 +160,7 @@ function App(): JSX.Element {
                   resources={resources}
                   userList={userList}
                   toStudyIds={toStudyIds}
+                  setToStudyIds={setToStudyIds}
                   getToStudy={getToStudy}
                   setGetToStudy={setGetToStudy}
                 />
