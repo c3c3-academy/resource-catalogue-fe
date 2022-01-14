@@ -1,25 +1,32 @@
 import "../styles/SingleResourceLoggedIn.css";
 import { getDate } from "../utils/getDate";
 import getusername from "../utils/getusername";
-import { inStudyList } from "../utils/inStudyList";
-import { IResource, IToStudy, IUser } from "../utils/Interfaces";
+import { IResource, IUser } from "../utils/Interfaces";
 import { isRecommended } from "../utils/isRecommended";
+<<<<<<< HEAD
 import axios from "axios";
 import { API_BASE } from "../utils/APIFragments";
 import { useEffect, useState } from "react";
+=======
+import RatingAndComment from "./RatingAndComment";
+>>>>>>> main
 
 interface SingleResourceProps {
   resource: IResource;
   userList: IUser[];
   userId: string | null;
+<<<<<<< HEAD
   toStudyIds: IToStudy[];
   getToStudy: boolean;
   setGetToStudy: (input: boolean) => void;
+=======
+>>>>>>> main
 }
 
 export default function SingleResourceLoggedIn(
   props: SingleResourceProps
 ): JSX.Element {
+<<<<<<< HEAD
   const [isInStudyList, setIsInStudyList] = useState<boolean>();
   const [buttonClicked, setButtonClicked] = useState<boolean>(false);
 
@@ -66,6 +73,8 @@ export default function SingleResourceLoggedIn(
     </button>
   );
 
+=======
+>>>>>>> main
   return (
     <div className="SingleResourceLoggedIn">
       <h3>{props.resource.resourcename}</h3>
@@ -81,7 +90,11 @@ export default function SingleResourceLoggedIn(
       <p>Recommended Mark Stage: {props.resource.contentstage}</p>
       <p>Recommendation: {isRecommended(props.resource.isrecommended)} </p>
       <p>Reason: {props.resource.reason} </p>
+<<<<<<< HEAD
       {buttonElement}
+=======
+      <RatingAndComment resourceId={props.resource.id} userId={props.userId} />
+>>>>>>> main
     </div>
   );
 }
