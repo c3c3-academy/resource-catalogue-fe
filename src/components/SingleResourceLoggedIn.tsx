@@ -21,6 +21,7 @@ interface SingleResourceProps {
 export default function SingleResourceLoggedIn(
   props: SingleResourceProps
 ): JSX.Element {
+  const [commentAdded, setCommentAdded] = useState<boolean>(false);
   const [isInStudyList, setIsInStudyList] = useState<boolean>();
   const [buttonClicked, setButtonClicked] = useState<boolean>(false);
 
@@ -80,7 +81,12 @@ export default function SingleResourceLoggedIn(
       <p>Recommendation: {isRecommended(props.resource.isrecommended)} </p>
       <p>Reason: {props.resource.reason} </p>
       {buttonElement}
-      <RatingAndComment resourceId={props.resource.id} userId={props.userId} />
+      <RatingAndComment
+        resourceId={props.resource.id}
+        userId={props.userId}
+        commentAdded={commentAdded}
+        setCommentAdded={setCommentAdded}
+      />
     </div>
   );
 }
