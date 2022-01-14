@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import SingleResourceLoggedIn from "../components/SingleResourceLoggedIn";
 import { useNavigate } from "react-router-dom";
 import { IResource, IToStudy, IUser } from "../utils/Interfaces";
@@ -10,27 +10,33 @@ interface ToStudyProps {
   savedUserId: string | null;
   resources: IResource[];
   userList: IUser[];
+  toStudyIds: IToStudy[];
+  setToStudyIds: (input: IToStudy[]) => void;
+  getToStudy: boolean;
+  setGetToStudy: (input: boolean) => void;
 }
 
 const ToStudy = ({
   savedUserId,
   resources,
   userList,
+  toStudyIds,
+  setToStudyIds,
+  getToStudy,
+  setGetToStudy,
 }: ToStudyProps): JSX.Element => {
   useNavigate();
-  const [toStudyIds, setToStudyIds] = useState<IToStudy[]>([]);
 
   useEffect(() => {
     axios
       .get(`${API_BASE}/tostudy/${savedUserId}`)
       .then((response) => {
-        console.log(response.data.tostudylist);
         setToStudyIds(response.data.tostudylist);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }, [savedUserId]);
+  }, [savedUserId, setToStudyIds]);
 
   const toStudyResources = getStudyResources(toStudyIds, resources).map(
     (resource) => (
@@ -39,6 +45,9 @@ const ToStudy = ({
         resource={resource}
         userList={userList}
         userId={savedUserId}
+        toStudyIds={toStudyIds}
+        getToStudy={getToStudy}
+        setGetToStudy={setGetToStudy}
       />
     )
   );
