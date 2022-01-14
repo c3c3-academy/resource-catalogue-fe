@@ -4,6 +4,9 @@ import getusername from "../utils/getusername";
 import { inStudyList } from "../utils/inStudyList";
 import { IResource, IToStudy, IUser } from "../utils/Interfaces";
 import { isRecommended } from "../utils/isRecommended";
+import axios from "axios";
+import { API_BASE } from "../utils/APIFragments";
+import { useState } from "react";
 
 interface SingleResourceProps {
   resource: IResource;
@@ -15,11 +18,22 @@ interface SingleResourceProps {
 export default function SingleResourceLoggedIn(
   props: SingleResourceProps
 ): JSX.Element {
-  const buttonElement = inStudyList(
-    props.resource.id,
-    props.userId,
-    props.toStudyIds
-  );
+  const handleDeleteToStudy = () => {
+    console.log("deleted to study");
+  };
+
+  const handleAddToStudy = () => {
+    axios
+      .post(`${API_BASE}/tostudy`, {
+        userid: props.userId,
+        resourceid: props.resource.id,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => console.log(error));
+  };
+  // const buttonElement =
 
   return (
     <div className="SingleResourceLoggedIn">
@@ -36,6 +50,15 @@ export default function SingleResourceLoggedIn(
       <p>Recommended Mark Stage: {props.resource.contentstage}</p>
       <p>Recommendation: {isRecommended(props.resource.isrecommended)} </p>
       <p>Reason: {props.resource.reason} </p>
+      {inStudyList(props.resource.id, props.userId, props.toStudyIds) ? (
+        <button className="DeleteToStudy" onClick={handleDeleteToStudy}>
+          Remove from To Study List
+        </button>
+      ) : (
+        <button className="AddToStudy" onClick={handleAddToStudy}>
+          Add To Study List
+        </button>
+      )}
     </div>
   );
 }

@@ -17,3 +17,11 @@
 .DateAuthor {
   flex: 30%;
 }
+
+.AddToStudy {
+  background-color: gold;
+}
+
+.DeleteToStudy {
+  background-color: tomato;
+}
