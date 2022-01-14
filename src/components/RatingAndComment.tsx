@@ -4,8 +4,8 @@ import { API_BASE } from "../utils/APIFragments";
 import AddComment from "./AddComment";
 
 interface StarRatingProps {
-  resourceId: string;
-  userId: string;
+  resourceId: number;
+  userId: string | null;
 }
 
 export default function StarRating({

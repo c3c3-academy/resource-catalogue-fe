@@ -3,8 +3,8 @@ import { useState } from "react";
 
 interface AddCommentProps {
   API_BASE: string;
-  resourceId: string;
-  userId: string;
+  resourceId: number;
+  userId: string | null;
   rating: number;
 }
 

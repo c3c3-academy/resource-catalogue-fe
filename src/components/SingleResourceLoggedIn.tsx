@@ -8,7 +8,7 @@ import RatingAndComment from "./RatingAndComment";
 interface SingleResourceProps {
   resource: IResource;
   userList: IUser[];
-  userId: string;
+  userId: string | null;
 }
 
 export default function SingleResourceLoggedIn(
