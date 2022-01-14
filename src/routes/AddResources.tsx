@@ -4,6 +4,8 @@ import { ITag } from "../utils/Interfaces";
 import { API_BASE } from "../utils/APIFragments";
 import axios from "axios";
 import { getTagId } from "../utils/getTagId";
+import "../styles/AddResources.css";
+
 interface AddResourceProps {
   userId: string | null;
   tags: ITag[];
@@ -21,6 +23,7 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
   const [recommend, setRecommend] = useState<string>("good");
   const [reason, setReason] = useState<string>("");
   const [enteredTags, setEnteredTags] = useState<string>("");
+  const [textIsUndefined, setTextIsUndefined] = useState(false);
 
   const contentTypes = [
     "video",
@@ -67,47 +70,58 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
   const handleSubmit = async () => {
     let resourceId: number;
 
-    await axios
-      .post(`${API_BASE}/resources`, {
-        resourcename: resourceName,
-        authorname: authorName,
-        url: url,
-        description: description,
-        contenttype: contentType,
-        contentstage: contentStage,
-        postedbyuserid: props.userId && parseInt(props.userId),
-        isrecommended: recommend,
-        reason: reason,
-      })
-      .then(function (response) {
-        resourceId = response.data.resourceAdded.id;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-    const tagList = enteredTags.split(", ");
-    tagList.forEach(async (tag) => {
-      const tagId = await getTagId({ tagToCheck: tag, tags: props.tags });
+    if (
+      resourceName === "" ||
+      authorName === "" ||
+      url === "" ||
+      description === "" ||
+      reason === ""
+    ) {
+      setTextIsUndefined(true);
+    } else {
       await axios
-        .post(`${API_BASE}/tagrelations`, {
-          tagid: tagId,
-          resourceid: resourceId,
+        .post(`${API_BASE}/resources`, {
+          resourcename: resourceName,
+          authorname: authorName,
+          url: url,
+          description: description,
+          contenttype: contentType,
+          contentstage: contentStage,
+          postedbyuserid: props.userId && parseInt(props.userId),
+          isrecommended: recommend,
+          reason: reason,
+        })
+        .then(function (response) {
+          console.log(resourceName);
+          resourceId = response.data.resourceAdded.id;
         })
         .catch(function (error) {
           console.log(error);
         });
-    });
 
-    setResourceName("");
-    setAuthorName("");
-    setURL("");
-    setDescription("");
-    setContentType("video");
-    setContentStage("Week 1: Workflows");
-    setRecommend("good");
-    setReason("");
-    setEnteredTags("");
+      const tagList = enteredTags.split(", ");
+      tagList.forEach(async (tag) => {
+        const tagId = await getTagId({ tagToCheck: tag, tags: props.tags });
+        await axios
+          .post(`${API_BASE}/tagrelations`, {
+            tagid: tagId,
+            resourceid: resourceId,
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      });
+
+      setResourceName("");
+      setAuthorName("");
+      setURL("");
+      setDescription("");
+      setContentType("video");
+      setContentStage("Week 1: Workflows");
+      setRecommend("good");
+      setReason("");
+      setEnteredTags("");
+    }
   };
 
   return (
@@ -196,6 +210,9 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
         </div>
       </form>
       <button onClick={() => handleSubmit()}>Add Resource </button>
+      {textIsUndefined && (
+        <p className="fieldEmpty">please comeplete all fields</p>
+      )}
     </div>
   );
 }
