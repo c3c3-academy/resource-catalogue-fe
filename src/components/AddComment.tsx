@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { IInteraction } from "../utils/Interfaces";
 
 interface AddCommentProps {
   API_BASE: string;
@@ -8,6 +9,7 @@ interface AddCommentProps {
   rating: number;
   setCommentAdded: (commentAdded: boolean) => void;
   commentAdded: boolean;
+  interactions:IInteraction[];
 }
 
 export default function AddComment(props: AddCommentProps): JSX.Element {
@@ -28,6 +30,7 @@ export default function AddComment(props: AddCommentProps): JSX.Element {
         .catch(function (error) {
           console.log(error);
         });
+        console.log(props.interactions)
     } else {
       setErrorMessage(true);
     }

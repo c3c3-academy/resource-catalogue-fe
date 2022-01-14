@@ -103,6 +103,7 @@ export default function SingleResourceLoggedIn(
         userId={props.userId}
         commentAdded={commentAdded}
         setCommentAdded={setCommentAdded}
+        interactions={interactions}
       />
     </div>
   );
