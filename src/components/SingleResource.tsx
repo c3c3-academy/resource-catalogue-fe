@@ -14,7 +14,11 @@ export default function SingleResource(
 ): JSX.Element {
   return (
     <div className="SingleResource">
-      <h3>{props.resource.resourcename}</h3>
+      <h3>
+        <a href={props.resource.url} target="_blank" rel="noreferrer">
+          {props.resource.resourcename}
+        </a>
+      </h3>
       <p>
         Added on {getDate(props.resource.creationdate)} by{" "}
         {getusername(props.userList, parseInt(props.resource.postedbyuserid))}
