@@ -23,11 +23,11 @@ export default function AddComment(props: AddCommentProps): JSX.Element {
           resourceid: resourceId,
           rating: rating,
           comment: textToAdd,
-        }).then(()=>props.setCommentAdded(true))
+        })
+        .then(() => props.setCommentAdded(true))
         .catch(function (error) {
           console.log(error);
         });
-      
     } else {
       setErrorMessage(true);
     }
