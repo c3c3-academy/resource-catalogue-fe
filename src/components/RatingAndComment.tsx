@@ -6,11 +6,15 @@ import AddComment from "./AddComment";
 interface StarRatingProps {
   resourceId: number;
   userId: string | null;
+  commentAdded: boolean;
+  setCommentAdded: (commentAdded: boolean) => void;
 }
 
 export default function StarRating({
   resourceId,
   userId,
+  commentAdded,
+  setCommentAdded,
 }: StarRatingProps): JSX.Element {
   const [rating, setRating] = useState<number>(0);
   const [hover, setHover] = useState<number>(0);
@@ -32,12 +36,26 @@ export default function StarRating({
           </button>
         );
       })}
+      {commentAdded === false ? (
+        <button
+          onClick={() => {
+            setRating(0);
+            setHover(0);
+          }}
+        >
+          clear
+        </button>
+      ) : (
+        <></>
+      )}
       {rating ? (
         <AddComment
           userId={userId}
           resourceId={resourceId}
           API_BASE={API_BASE}
           rating={rating}
+          setCommentAdded={setCommentAdded}
+          commentAdded={commentAdded}
         />
       ) : (
         <p>Rate the resource to add a comment</p>

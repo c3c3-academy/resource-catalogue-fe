@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "../styles/SingleResourceLoggedIn.css";
 import { getDate } from "../utils/getDate";
 import getusername from "../utils/getusername";
@@ -14,6 +15,8 @@ interface SingleResourceProps {
 export default function SingleResourceLoggedIn(
   props: SingleResourceProps
 ): JSX.Element {
+  const [commentAdded, setCommentAdded] = useState<boolean>(false);
+
   return (
     <div className="SingleResourceLoggedIn">
       <h3>{props.resource.resourcename}</h3>
@@ -29,7 +32,12 @@ export default function SingleResourceLoggedIn(
       <p>Recommended Mark Stage: {props.resource.contentstage}</p>
       <p>Recommendation: {isRecommended(props.resource.isrecommended)} </p>
       <p>Reason: {props.resource.reason} </p>
-      <RatingAndComment resourceId={props.resource.id} userId={props.userId} />
+      <RatingAndComment
+        resourceId={props.resource.id}
+        userId={props.userId}
+        commentAdded={commentAdded}
+        setCommentAdded={setCommentAdded}
+      />
     </div>
   );
 }
