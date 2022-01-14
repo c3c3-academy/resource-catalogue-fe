@@ -10,6 +10,8 @@ interface ResourcesProps {
   userId: string | null;
   resources: IResource[];
   toStudyIds: IToStudy[];
+  getToStudy: boolean;
+  setGetToStudy: (input: boolean) => void;
 }
 
 export default function Resources({
@@ -19,6 +21,8 @@ export default function Resources({
   userId,
   resources,
   toStudyIds,
+  getToStudy,
+  setGetToStudy,
 }: ResourcesProps): JSX.Element {
   const filteredResources = resources
     .filter((element) => {
@@ -62,6 +66,8 @@ export default function Resources({
           key={resource.id}
           userId={userId}
           toStudyIds={toStudyIds}
+          getToStudy={getToStudy}
+          setGetToStudy={setGetToStudy}
         />
       );
     });

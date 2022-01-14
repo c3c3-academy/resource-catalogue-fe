@@ -8,6 +8,8 @@ interface ToStudyProps {
   resources: IResource[];
   userList: IUser[];
   toStudyIds: IToStudy[];
+  getToStudy: boolean;
+  setGetToStudy: (input: boolean) => void;
 }
 
 const ToStudy = ({
@@ -15,6 +17,8 @@ const ToStudy = ({
   resources,
   userList,
   toStudyIds,
+  getToStudy,
+  setGetToStudy,
 }: ToStudyProps): JSX.Element => {
   useNavigate();
 
@@ -26,6 +30,8 @@ const ToStudy = ({
         userList={userList}
         userId={savedUserId}
         toStudyIds={toStudyIds}
+        getToStudy={getToStudy}
+        setGetToStudy={setGetToStudy}
       />
     )
   );

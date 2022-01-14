@@ -14,6 +14,7 @@ function App(): JSX.Element {
   const [tags, setTags] = useState<ITag[]>([]);
   const [resources, setResources] = useState<IResource[]>([]);
   const [toStudyIds, setToStudyIds] = useState<IToStudy[]>([]);
+  const [getToStudy, setGetToStudy] = useState<boolean>(false);
 
   useEffect(() => {
     if (userId !== null) {
@@ -27,7 +28,7 @@ function App(): JSX.Element {
           console.log(error);
         });
     }
-  }, [userId]);
+  }, [userId, getToStudy]);
 
   useEffect(() => {
     const fn = async () => {
@@ -122,6 +123,8 @@ function App(): JSX.Element {
                   userId={userId}
                   resources={resources}
                   toStudyIds={toStudyIds}
+                  getToStudy={getToStudy}
+                  setGetToStudy={setGetToStudy}
                 />
               </>
             }
@@ -157,6 +160,8 @@ function App(): JSX.Element {
                   resources={resources}
                   userList={userList}
                   toStudyIds={toStudyIds}
+                  getToStudy={getToStudy}
+                  setGetToStudy={setGetToStudy}
                 />
               </>
             }

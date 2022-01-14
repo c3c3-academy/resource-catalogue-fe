@@ -9,6 +9,8 @@ interface MainContentProps {
   userId: string | null;
   resources: IResource[];
   toStudyIds: IToStudy[];
+  getToStudy: boolean;
+  setGetToStudy: (input: boolean) => void;
 }
 
 export default function MainContent({
@@ -16,6 +18,8 @@ export default function MainContent({
   userId,
   resources,
   toStudyIds,
+  getToStudy,
+  setGetToStudy,
 }: MainContentProps): JSX.Element {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedTags, setSelectedTags] = useState<ITag[]>([]);
@@ -41,6 +45,8 @@ export default function MainContent({
           userId={userId}
           resources={resources}
           toStudyIds={toStudyIds}
+          getToStudy={getToStudy}
+          setGetToStudy={setGetToStudy}
         />
       </div>
       <div className="right">
