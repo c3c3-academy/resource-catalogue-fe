@@ -22,3 +22,25 @@
   background-color: white;
   overflow: hidden;
 }
+
+.SingleComment {
+  display: flex;
+}
+
+.starsForComments {
+  padding-top: 5px;
+  flex: 20%;
+  vertical-align: middle;
+}
+
+.comment {
+  flex: 70%;
+  vertical-align: middle;
+  padding-bottom: 5px;
+}
+
+.user {
+  flex: 10%;
+  vertical-align: middle;
+  padding-bottom: 5px;
+}
