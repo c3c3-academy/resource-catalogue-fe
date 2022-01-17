@@ -1,5 +1,5 @@
-import { hasUserCommented } from "./hasUserCommented";
 import { IInteraction } from "./Interfaces";
+import { getRating } from "./getRating";
 
 const mockInteractionsList: IInteraction[] = [
   {
@@ -39,13 +39,11 @@ const mockInteractionsList: IInteraction[] = [
   },
 ];
 
-test("Check datatype is a boolean", () => {
-  expect(typeof hasUserCommented(3, "16", mockInteractionsList)).toBe(
-    "boolean"
-  );
+test("Check datatype is a number", () => {
+  expect(typeof getRating(3, "16", mockInteractionsList)).toBe("number");
 });
 
-test("expected value returned checking if the user has interacted with the resource", () => {
-  expect(hasUserCommented(1, "3", mockInteractionsList)).toBe(true);
-  expect(hasUserCommented(5, "16", mockInteractionsList)).toBe(false);
+test("expected value returned checking the rating of a resource", () => {
+  expect(getRating(1, "3", mockInteractionsList)).toBe(4);
+  expect(getRating(5, "16", mockInteractionsList)).toBe(0);
 });

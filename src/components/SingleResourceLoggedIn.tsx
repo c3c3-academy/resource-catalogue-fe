@@ -21,11 +21,11 @@ interface SingleResourceProps {
 export default function SingleResourceLoggedIn(
   props: SingleResourceProps
 ): JSX.Element {
-  const [commentAdded, setCommentAdded] = useState<boolean>(false);
   const [isInStudyList, setIsInStudyList] = useState<boolean>();
-  const [buttonClicked, setButtonClicked] = useState<boolean>(false);
+  const [studyButtonClicked, setStudyButtonClicked] = useState<boolean>(false);
   const [interactions, setInteractions] = useState<IInteraction[]>([]);
-  const [getUpdatedInteractions, setGetUpdatedInteractions] = useState<boolean>(false);
+  const [getUpdatedInteractions, setGetUpdatedInteractions] =
+    useState<boolean>(false);
 
   useEffect(() => {
     if (props.userId !== null) {
@@ -41,12 +41,11 @@ export default function SingleResourceLoggedIn(
     }
   }, [props.userId, getUpdatedInteractions]);
 
-
   useEffect(() => {
     setIsInStudyList(
       inStudyList(props.resource.id, props.userId, props.toStudyIds)
     );
-  }, [props.resource.id, props.userId, props.toStudyIds, buttonClicked]);
+  }, [props.resource.id, props.userId, props.toStudyIds, studyButtonClicked]);
 
   const handleDeleteToStudy = async () => {
     await axios({
@@ -55,7 +54,7 @@ export default function SingleResourceLoggedIn(
       data: { userid: props.userId, resourceid: props.resource.id },
     })
       .then((response) => {
-        setButtonClicked(!buttonClicked);
+        setStudyButtonClicked(!studyButtonClicked);
         props.setGetToStudy(!props.getToStudy);
       })
       .catch((error) => console.log(error));
@@ -68,7 +67,7 @@ export default function SingleResourceLoggedIn(
         resourceid: props.resource.id,
       })
       .then((response) => {
-        setButtonClicked(!buttonClicked);
+        setStudyButtonClicked(!studyButtonClicked);
         props.setGetToStudy(!props.getToStudy);
       })
       .catch((error) => console.log(error));
@@ -101,8 +100,6 @@ export default function SingleResourceLoggedIn(
       <RatingAndComment
         resourceId={props.resource.id}
         userId={props.userId}
-        commentAdded={commentAdded}
-        setCommentAdded={setCommentAdded}
         interactions={interactions}
         setGetUpdatedInteractions={setGetUpdatedInteractions}
         getUpdatedInteractions={getUpdatedInteractions}
