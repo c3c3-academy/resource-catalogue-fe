@@ -1,7 +1,7 @@
 import "../styles/SingleResourceLoggedIn.css";
 import { getDate } from "../utils/getDate";
 import getusername from "../utils/getusername";
-import { IResource, IToStudy, IUser } from "../utils/Interfaces";
+import { IInteraction, IResource, IToStudy, IUser } from "../utils/Interfaces";
 import { isRecommended } from "../utils/isRecommended";
 import axios from "axios";
 import { API_BASE } from "../utils/APIFragments";
@@ -21,15 +21,32 @@ interface SingleResourceProps {
 export default function SingleResourceLoggedIn(
   props: SingleResourceProps
 ): JSX.Element {
-  const [commentAdded, setCommentAdded] = useState<boolean>(false);
   const [isInStudyList, setIsInStudyList] = useState<boolean>();
-  const [buttonClicked, setButtonClicked] = useState<boolean>(false);
+  const [studyButtonClicked, setStudyButtonClicked] = useState<boolean>(false);
+  const [interactions, setInteractions] = useState<IInteraction[]>([]);
+  const [getUpdatedInteractions, setGetUpdatedInteractions] =
+    useState<boolean>(false);
 
+  useEffect(() => {
+    if (props.userId !== null) {
+      axios
+        .get(`${API_BASE}/interactionsbyuser/${props.userId}`)
+        .then((response) => {
+          console.log(response.data.interactions);
+          setInteractions(response.data.interactions);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  }, [props.userId, getUpdatedInteractions]);
+
+  // useEffect checks if a resource is in the users study list
   useEffect(() => {
     setIsInStudyList(
       inStudyList(props.resource.id, props.userId, props.toStudyIds)
     );
-  }, [props.resource.id, props.userId, props.toStudyIds, buttonClicked]);
+  }, [props.resource.id, props.userId, props.toStudyIds, studyButtonClicked]);
 
   const handleDeleteToStudy = async () => {
     await axios({
@@ -38,7 +55,7 @@ export default function SingleResourceLoggedIn(
       data: { userid: props.userId, resourceid: props.resource.id },
     })
       .then((response) => {
-        setButtonClicked(!buttonClicked);
+        setStudyButtonClicked(!studyButtonClicked);
         props.setGetToStudy(!props.getToStudy);
       })
       .catch((error) => console.log(error));
@@ -51,7 +68,7 @@ export default function SingleResourceLoggedIn(
         resourceid: props.resource.id,
       })
       .then((response) => {
-        setButtonClicked(!buttonClicked);
+        setStudyButtonClicked(!studyButtonClicked);
         props.setGetToStudy(!props.getToStudy);
       })
       .catch((error) => console.log(error));
@@ -88,8 +105,9 @@ export default function SingleResourceLoggedIn(
       <RatingAndComment
         resourceId={props.resource.id}
         userId={props.userId}
-        commentAdded={commentAdded}
-        setCommentAdded={setCommentAdded}
+        interactions={interactions}
+        setGetUpdatedInteractions={setGetUpdatedInteractions}
+        getUpdatedInteractions={getUpdatedInteractions}
       />
     </div>
   );
