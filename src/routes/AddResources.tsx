@@ -9,6 +9,10 @@ import "../styles/AddResources.css";
 interface AddResourceProps {
   userId: string | null;
   tags: ITag[];
+  getResources: boolean;
+  setGetResources: (input: boolean) => void;
+  getTags: boolean;
+  setGetTags: (input: boolean) => void;
 }
 
 export default function AddResources(props: AddResourceProps): JSX.Element {
@@ -121,6 +125,9 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
       setRecommend("good");
       setReason("");
       setEnteredTags("");
+      setTextIsUndefined(false);
+      props.setGetResources(!props.getResources);
+      props.setGetTags(!props.getTags);
     }
   };
 
@@ -211,7 +218,7 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
       </form>
       <button onClick={() => handleSubmit()}>Add Resource </button>
       {textIsUndefined && (
-        <p className="fieldEmpty">please comeplete all fields</p>
+        <p className="fieldEmpty">please complete all fields</p>
       )}
     </div>
   );

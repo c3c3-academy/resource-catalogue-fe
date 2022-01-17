@@ -25,6 +25,7 @@ export default function SingleResourceLoggedIn(
   const [isInStudyList, setIsInStudyList] = useState<boolean>();
   const [buttonClicked, setButtonClicked] = useState<boolean>(false);
 
+  // useEffect checks if a resource is in the users study list
   useEffect(() => {
     setIsInStudyList(
       inStudyList(props.resource.id, props.userId, props.toStudyIds)
