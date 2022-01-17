@@ -1,64 +1,82 @@
 import { useState } from "react";
 import "../styles/StarRating.css";
 import { API_BASE } from "../utils/APIFragments";
+import { hasUserCommented } from "../utils/hasUserCommented";
+import { IInteraction } from "../utils/Interfaces";
+import { getRating } from "../utils/getRating";
 import AddComment from "./AddComment";
 
-interface StarRatingProps {
+interface RatingAndCommentProps {
   resourceId: number;
   userId: string | null;
-  commentAdded: boolean;
-  setCommentAdded: (commentAdded: boolean) => void;
+  interactions: IInteraction[];
+  setGetUpdatedInteractions: (getUpdatedInteractions: boolean) => void;
+  getUpdatedInteractions: boolean;
 }
 
-export default function StarRating({
+export default function RatingAndComment({
   resourceId,
   userId,
-  commentAdded,
-  setCommentAdded,
-}: StarRatingProps): JSX.Element {
+  interactions,
+  setGetUpdatedInteractions,
+  getUpdatedInteractions,
+}: RatingAndCommentProps): JSX.Element {
   const [rating, setRating] = useState<number>(0);
   const [hover, setHover] = useState<number>(0);
 
   return (
-    <div className="star-rating">
-      {[...Array(5)].map((star, index) => {
-        index += 1;
-        return (
-          <button
-            type="button"
-            key={index}
-            className={index <= (hover || rating) ? "on" : "off"}
-            onClick={() => setRating(index)}
-            onMouseEnter={() => setHover(index)}
-            onMouseLeave={() => setHover(rating)}
-          >
-            <span className="star">&#9733;</span>
-          </button>
-        );
-      })}
-      {commentAdded === false ? (
-        <button
-          onClick={() => {
-            setRating(0);
-            setHover(0);
-          }}
-        >
-          clear
-        </button>
+    <div className="RatingAndComment">
+      {hasUserCommented(resourceId, userId, interactions) ? (
+        <div className="star-rating">
+          {[...Array(5)].map((star, index) => {
+            index += 1;
+            return (
+              <button
+                type="button"
+                key={index}
+                className={
+                  index <= getRating(resourceId, userId, interactions)
+                    ? "on"
+                    : "off"
+                }
+              >
+                <span className="star">&#9733;</span>
+              </button>
+            );
+          })}
+          <p>You rated this resource!</p>
+        </div>
       ) : (
-        <></>
-      )}
-      {rating ? (
-        <AddComment
-          userId={userId}
-          resourceId={resourceId}
-          API_BASE={API_BASE}
-          rating={rating}
-          setCommentAdded={setCommentAdded}
-          commentAdded={commentAdded}
-        />
-      ) : (
-        <p>Rate the resource to add a comment</p>
+        <div className="star-rating">
+          {[...Array(5)].map((star, index) => {
+            index += 1;
+            return (
+              <button
+                type="button"
+                key={index}
+                className={index <= (hover || rating) ? "on" : "off"}
+                onClick={() => setRating(index)}
+                onMouseEnter={() => setHover(index)}
+                onMouseLeave={() => setHover(rating)}
+              >
+                <span className="star">&#9733;</span>
+              </button>
+            );
+          })}
+          {rating ? (
+            <AddComment
+              userId={userId}
+              resourceId={resourceId}
+              API_BASE={API_BASE}
+              rating={rating}
+              interactions={interactions}
+              setGetUpdatedInteractions={setGetUpdatedInteractions}
+              getUpdatedInteractions={getUpdatedInteractions}
+            />
+          ) : (
+            <p>Rate the resource to add a comment</p>
+          )}
+        </div>
       )}
     </div>
   );
