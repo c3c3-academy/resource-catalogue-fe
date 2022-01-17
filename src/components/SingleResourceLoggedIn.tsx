@@ -8,6 +8,7 @@ import { API_BASE } from "../utils/APIFragments";
 import { useEffect, useState } from "react";
 import RatingAndComment from "./RatingAndComment";
 import { inStudyList } from "../utils/inStudyList";
+import CollapsibleComments from "./CollapsibleComments";
 
 interface SingleResourceProps {
   resource: IResource;
@@ -108,6 +109,10 @@ export default function SingleResourceLoggedIn(
         interactions={interactions}
         setGetUpdatedInteractions={setGetUpdatedInteractions}
         getUpdatedInteractions={getUpdatedInteractions}
+      />
+      <CollapsibleComments
+        userId={props.userId}
+        resourceId={props.resource.id}
       />
     </div>
   );

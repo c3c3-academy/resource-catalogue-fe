@@ -25,3 +25,11 @@
 .DeleteToStudy {
   background-color: tomato;
 }
+
+.AddToStudy:hover {
+  cursor: pointer;
+}
+
+.DeleteToStudy:hover {
+  cursor: pointer;
+}
