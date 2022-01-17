@@ -41,6 +41,7 @@ export default function SingleResourceLoggedIn(
     }
   }, [props.userId, getUpdatedInteractions]);
 
+  // useEffect checks if a resource is in the users study list
   useEffect(() => {
     setIsInStudyList(
       inStudyList(props.resource.id, props.userId, props.toStudyIds)
@@ -83,7 +84,11 @@ export default function SingleResourceLoggedIn(
   );
   return (
     <div className="SingleResourceLoggedIn">
-      <h3>{props.resource.resourcename}</h3>
+      <h3>
+        <a href={props.resource.url} target="_blank" rel="noreferrer">
+          {props.resource.resourcename}
+        </a>
+      </h3>
       <p>
         Added on {getDate(props.resource.creationdate)} by{" "}
         {getusername(props.userList, parseInt(props.resource.postedbyuserid))}

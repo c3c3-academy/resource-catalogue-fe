@@ -15,7 +15,10 @@ function App(): JSX.Element {
   const [resources, setResources] = useState<IResource[]>([]);
   const [toStudyIds, setToStudyIds] = useState<IToStudy[]>([]);
   const [getToStudy, setGetToStudy] = useState<boolean>(false);
+  const [getResources, setGetResources] = useState<boolean>(false);
+  const [getTags, setGetTags] = useState<boolean>(false);
 
+  // useEffect to GET the to-study of each user, contains resourceid and userid
   useEffect(() => {
     if (userId !== null) {
       axios
@@ -30,6 +33,7 @@ function App(): JSX.Element {
     }
   }, [userId, getToStudy]);
 
+  // useEffect to get all the resources and their tags
   useEffect(() => {
     const fn = async () => {
       await axios
@@ -66,8 +70,9 @@ function App(): JSX.Element {
         });
     };
     fn();
-  }, []);
+  }, [getResources]);
 
+  // useEffect to get all the users
   useEffect(() => {
     axios
       .get(`${API_BASE}/users`)
@@ -79,6 +84,7 @@ function App(): JSX.Element {
       });
   }, []);
 
+  // useEffect to get all the tags
   useEffect(() => {
     axios
       .get(`${API_BASE}/tags`)
@@ -88,7 +94,7 @@ function App(): JSX.Element {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [getTags]);
 
   const retrieveSavedUser = () => {
     return localStorage.getItem("savedUserId");
@@ -96,6 +102,7 @@ function App(): JSX.Element {
 
   const savedUserId = retrieveSavedUser();
 
+  // useEffect to save the current user id
   useEffect(() => {
     setUserId(savedUserId ? savedUserId : null);
   }, [savedUserId]);
@@ -140,7 +147,14 @@ function App(): JSX.Element {
                   savedUserId={savedUserId ? savedUserId : ""}
                   setUserList={setUserList}
                 />
-                <AddResources userId={userId} tags={tags} />
+                <AddResources
+                  userId={userId}
+                  tags={tags}
+                  getResources={getResources}
+                  setGetResources={setGetResources}
+                  getTags={getTags}
+                  setGetTags={setGetTags}
+                />
               </>
             }
           />
@@ -160,7 +174,6 @@ function App(): JSX.Element {
                   resources={resources}
                   userList={userList}
                   toStudyIds={toStudyIds}
-                  setToStudyIds={setToStudyIds}
                   getToStudy={getToStudy}
                   setGetToStudy={setGetToStudy}
                 />
