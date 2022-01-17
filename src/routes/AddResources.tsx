@@ -28,6 +28,7 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
   const [reason, setReason] = useState<string>("");
   const [enteredTags, setEnteredTags] = useState<string>("");
   const [textIsUndefined, setTextIsUndefined] = useState(false);
+  const [error403, setError403] = useState<boolean>(false);
 
   const contentTypes = [
     "video",
@@ -72,7 +73,9 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
   ));
 
   const handleSubmit = async () => {
-    let resourceId: number;
+    // let resourceId: number;
+
+    let resourceId = 0;
 
     if (
       resourceName === "" ||
@@ -96,38 +99,46 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
           reason: reason,
         })
         .then(function (response) {
-          console.log(resourceName);
           resourceId = response.data.resourceAdded.id;
         })
         .catch(function (error) {
-          console.log(error);
+          console.log(error.response.data);
+          const errorMessage = error.response.data.message;
+          console.log(error.response.data.message);
+          if (errorMessage.includes("already exists")) {
+            console.log("error 403 has been completed");
+            setError403(true);
+          }
         });
 
-      const tagList = enteredTags.split(", ");
-      tagList.forEach(async (tag) => {
-        const tagId = await getTagId({ tagToCheck: tag, tags: props.tags });
-        await axios
-          .post(`${API_BASE}/tagrelations`, {
-            tagid: tagId,
-            resourceid: resourceId,
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      });
+      if (resourceId > 0) {
+        const tagList = enteredTags.split(", ");
+        tagList.forEach(async (tag) => {
+          const tagId = await getTagId({ tagToCheck: tag, tags: props.tags });
+          await axios
+            .post(`${API_BASE}/tagrelations`, {
+              tagid: tagId,
+              resourceid: resourceId,
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        });
 
-      setResourceName("");
-      setAuthorName("");
-      setURL("");
-      setDescription("");
-      setContentType("video");
-      setContentStage("Week 1: Workflows");
-      setRecommend("good");
-      setReason("");
-      setEnteredTags("");
-      setTextIsUndefined(false);
-      props.setGetResources(!props.getResources);
-      props.setGetTags(!props.getTags);
+        setResourceName("");
+        setAuthorName("");
+        setURL("");
+        setDescription("");
+        setContentType("video");
+        setContentStage("Week 1: Workflows");
+        setRecommend("good");
+        setReason("");
+        setEnteredTags("");
+        setError403(false);
+        setTextIsUndefined(false);
+        props.setGetResources(!props.getResources);
+        props.setGetTags(!props.getTags);
+      }
     }
   };
 
@@ -219,6 +230,9 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
       <button onClick={() => handleSubmit()}>Add Resource </button>
       {textIsUndefined && (
         <p className="fieldEmpty">please complete all fields</p>
+      )}
+      {error403 && (
+        <p className="fieldEmpty">Resource has already been posted</p>
       )}
     </div>
   );

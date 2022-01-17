@@ -19,7 +19,7 @@ describe("all resources", () => {
 
     cy.get(".SearchInput").click().type("react");
 
-    cy.get(".SingleResource").should("have.length", 3);
+    cy.get(".SingleResource").should("have.length", 4);
   });
 
   it("displays list of users", () => {
