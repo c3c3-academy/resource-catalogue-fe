@@ -125,7 +125,6 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
             });
         });
 
-
         setResourceName("");
         setAuthorName("");
         setURL("");
@@ -136,9 +135,10 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
         setReason("");
         setEnteredTags("");
         setError403(false);
-      setTextIsUndefined(false);
-      props.setGetResources(!props.getResources);
-      props.setGetTags(!props.getTags);
+        setTextIsUndefined(false);
+        props.setGetResources(!props.getResources);
+        props.setGetTags(!props.getTags);
+      }
     }
   };
 
@@ -237,4 +237,3 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
     </div>
   );
 }
-  }
