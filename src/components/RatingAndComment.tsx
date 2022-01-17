@@ -5,21 +5,25 @@ import { hasUserCommented } from "../utils/hasUserCommented";
 import { IInteraction } from "../utils/Interfaces";
 import AddComment from "./AddComment";
 
-interface StarRatingProps {
+interface RatingAndCommentProps {
   resourceId: number;
   userId: string | null;
   commentAdded: boolean;
   setCommentAdded: (commentAdded: boolean) => void;
   interactions: IInteraction[]
+  setGetUpdatedInteractions: (getUpdatedInteractions: boolean) => void;
+  getUpdatedInteractions: boolean;
 }
 
-export default function StarRating({
+export default function RatingAndComment({
   resourceId,
   userId,
   commentAdded,
   setCommentAdded,
-  interactions
-}: StarRatingProps): JSX.Element {
+  interactions,
+  setGetUpdatedInteractions,
+  getUpdatedInteractions
+}: RatingAndCommentProps): JSX.Element {
   const [rating, setRating] = useState<number>(0);
   const [hover, setHover] = useState<number>(0);
 
@@ -49,6 +53,8 @@ export default function StarRating({
           setCommentAdded={setCommentAdded}
           commentAdded={commentAdded}
           interactions={interactions}
+          setGetUpdatedInteractions={setGetUpdatedInteractions}
+          getUpdatedInteractions={getUpdatedInteractions}
         />
       ) : (
         <p>Rate the resource to add a comment</p>
@@ -80,6 +86,8 @@ export default function StarRating({
           setCommentAdded={setCommentAdded}
           commentAdded={commentAdded}
           interactions={interactions}
+          setGetUpdatedInteractions={setGetUpdatedInteractions}
+          getUpdatedInteractions={getUpdatedInteractions}
         />
       ) : (
         <p>Rate the resource to add a comment</p>

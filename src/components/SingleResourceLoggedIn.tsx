@@ -104,6 +104,8 @@ export default function SingleResourceLoggedIn(
         commentAdded={commentAdded}
         setCommentAdded={setCommentAdded}
         interactions={interactions}
+        setGetUpdatedInteractions={setGetUpdatedInteractions}
+        getUpdatedInteractions={getUpdatedInteractions}
       />
     </div>
   );

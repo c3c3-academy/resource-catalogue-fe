@@ -10,6 +10,8 @@ interface AddCommentProps {
   setCommentAdded: (commentAdded: boolean) => void;
   commentAdded: boolean;
   interactions:IInteraction[];
+  setGetUpdatedInteractions: (getUpdatedInteractions: boolean) => void;
+  getUpdatedInteractions: boolean;
 }
 
 export default function AddComment(props: AddCommentProps): JSX.Element {
@@ -26,7 +28,7 @@ export default function AddComment(props: AddCommentProps): JSX.Element {
           rating: rating,
           comment: textToAdd,
         })
-        .then(() => props.setCommentAdded(true))
+        .then(() => props.setGetUpdatedInteractions(!props.getUpdatedInteractions))
         .catch(function (error) {
           console.log(error);
         });
@@ -38,7 +40,7 @@ export default function AddComment(props: AddCommentProps): JSX.Element {
 
   return (
     <>
-      {props.commentAdded ? (
+      {props.getUpdatedInteractions ? (
         <p>You rated this resource!</p>
       ) : (
         <div className="CreateComment">
