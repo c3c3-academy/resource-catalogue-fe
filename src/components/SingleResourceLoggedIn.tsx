@@ -1,4 +1,5 @@
 import "../styles/SingleResourceLoggedIn.css";
+import "../styles/StarRating.css";
 import { getDate } from "../utils/getDate";
 import getusername from "../utils/getusername";
 import { IInteraction, IResource, IToStudy, IUser } from "../utils/Interfaces";
@@ -8,6 +9,7 @@ import { API_BASE } from "../utils/APIFragments";
 import { useEffect, useState } from "react";
 import RatingAndComment from "./RatingAndComment";
 import { inStudyList } from "../utils/inStudyList";
+import CollapsibleComments from "./CollapsibleComments";
 
 interface SingleResourceProps {
   resource: IResource;
@@ -23,23 +25,42 @@ export default function SingleResourceLoggedIn(
 ): JSX.Element {
   const [isInStudyList, setIsInStudyList] = useState<boolean>();
   const [studyButtonClicked, setStudyButtonClicked] = useState<boolean>(false);
-  const [interactions, setInteractions] = useState<IInteraction[]>([]);
+  const [interactionsByUser, setInteractionsByUser] = useState<IInteraction[]>(
+    []
+  );
+  const [interactionsByResource, setInteractionsByResource] = useState<
+    IInteraction[]
+  >([]);
   const [getUpdatedInteractions, setGetUpdatedInteractions] =
     useState<boolean>(false);
 
+  // useEffect to get interactions by a user
   useEffect(() => {
     if (props.userId !== null) {
       axios
         .get(`${API_BASE}/interactionsbyuser/${props.userId}`)
         .then((response) => {
           console.log(response.data.interactions);
-          setInteractions(response.data.interactions);
+          setInteractionsByUser(response.data.interactions);
         })
         .catch(function (error) {
           console.log(error);
         });
     }
   }, [props.userId, getUpdatedInteractions]);
+
+  // useEffect to get interactions for a resource
+  useEffect(() => {
+    axios
+      .get(`${API_BASE}/interactions/${props.resource.id}`)
+      .then((response) => {
+        console.log(response.data.interactions);
+        setInteractionsByResource(response.data.interactions);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [props.resource.id, getUpdatedInteractions]);
 
   // useEffect checks if a resource is in the users study list
   useEffect(() => {
@@ -105,9 +126,15 @@ export default function SingleResourceLoggedIn(
       <RatingAndComment
         resourceId={props.resource.id}
         userId={props.userId}
-        interactions={interactions}
+        interactions={interactionsByUser}
         setGetUpdatedInteractions={setGetUpdatedInteractions}
         getUpdatedInteractions={getUpdatedInteractions}
+      />
+      <CollapsibleComments
+        userId={props.userId}
+        userList={props.userList}
+        resourceId={props.resource.id}
+        resourceInteractions={interactionsByResource}
       />
     </div>
   );
