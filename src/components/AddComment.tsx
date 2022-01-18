@@ -32,7 +32,6 @@ export default function AddComment(props: AddCommentProps): JSX.Element {
         .catch(function (error) {
           console.log(error);
         });
-      console.log(props.interactions);
     } else {
       setErrorMessage(true);
     }

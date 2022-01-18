@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/StarRating.css";
 import { API_BASE } from "../utils/APIFragments";
 import { hasUserCommented } from "../utils/hasUserCommented";
@@ -23,6 +23,11 @@ export default function RatingAndComment({
 }: RatingAndCommentProps): JSX.Element {
   const [rating, setRating] = useState<number>(0);
   const [hover, setHover] = useState<number>(0);
+
+  useEffect(() => {
+    setRating(0);
+    setHover(0);
+  }, [getUpdatedInteractions]);
 
   return (
     <div className="RatingAndComment">

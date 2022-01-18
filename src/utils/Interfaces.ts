@@ -11,6 +11,7 @@ export interface IResource {
   isrecommended: string;
   creationdate: string;
   reason: string;
+  avgrating: string | null;
 }
 
 export interface ITag {

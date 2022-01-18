@@ -24,7 +24,6 @@ function App(): JSX.Element {
       axios
         .get(`${API_BASE}/tostudy/${userId}`)
         .then((response) => {
-          console.log(response.data.tostudylist);
           setToStudyIds(response.data.tostudylist);
         })
         .catch(function (error) {
