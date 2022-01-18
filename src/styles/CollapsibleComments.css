@@ -25,6 +25,8 @@
 
 .SingleComment {
   display: flex;
+  border-bottom: 1px solid rgb(206, 206, 206);
+  margin-bottom: 1px;
 }
 
 .starsForComments {
@@ -34,7 +36,7 @@
 }
 
 .comment {
-  flex: 70%;
+  flex: 65%;
   vertical-align: middle;
   padding-bottom: 5px;
 }
@@ -43,4 +45,18 @@
   flex: 10%;
   vertical-align: middle;
   padding-bottom: 5px;
+}
+
+.delete {
+  flex: 5%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: red;
+  font-size: large;
+}
+
+.delete-space {
+  flex: 5%;
 }

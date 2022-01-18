@@ -1,5 +1,7 @@
+import axios from "axios";
 import { useState } from "react";
 import "../styles/CollapsibleComments.css";
+import { API_BASE } from "../utils/APIFragments";
 import getusername from "../utils/getusername";
 import { IInteraction, IUser } from "../utils/Interfaces";
 
@@ -8,6 +10,8 @@ interface CollapsibleCommentsProps {
   userList: IUser[];
   resourceId: number;
   resourceInteractions: IInteraction[];
+  setGetUpdatedInteractions: (getUpdatedInteractions: boolean) => void;
+  getUpdatedInteractions: boolean;
 }
 
 export default function CollapsibleComments({
@@ -15,8 +19,24 @@ export default function CollapsibleComments({
   userList,
   resourceId,
   resourceInteractions,
+  setGetUpdatedInteractions,
+  getUpdatedInteractions,
 }: CollapsibleCommentsProps): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleDeleteComment = async () => {
+    if (userId !== null) {
+      await axios({
+        method: "delete",
+        url: `${API_BASE}/interactions`,
+        data: { userid: userId, resourceid: resourceId },
+      })
+        .then((response) => {
+          setGetUpdatedInteractions(!getUpdatedInteractions);
+        })
+        .catch((error) => console.log(error));
+    }
+  };
 
   const ratingAndComments = resourceInteractions.map((interaction) => (
     <div key={interaction.id} className="SingleComment">
@@ -36,6 +56,13 @@ export default function CollapsibleComments({
       </div>
       <p className="user">{getusername(userList, interaction.userid)}:</p>
       <p className="comment">{interaction.comment}</p>
+      {userId !== null && interaction.userid === parseInt(userId) ? (
+        <button className="delete" onClick={handleDeleteComment}>
+          <span className="x">&#10005;</span>
+        </button>
+      ) : (
+        <span className="delete-space"></span>
+      )}
     </div>
   ));
 

@@ -135,6 +135,8 @@ export default function SingleResourceLoggedIn(
         userList={props.userList}
         resourceId={props.resource.id}
         resourceInteractions={interactionsByResource}
+        setGetUpdatedInteractions={setGetUpdatedInteractions}
+        getUpdatedInteractions={getUpdatedInteractions}
       />
     </div>
   );
