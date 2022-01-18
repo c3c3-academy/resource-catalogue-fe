@@ -38,8 +38,8 @@ export default function CollapsibleComments({
     }
   };
 
-  const ratingAndComments = resourceInteractions.map((interaction) => (
-    <div key={interaction.id} className="SingleComment">
+  const ratingAndComments = resourceInteractions?.map((interaction, index) => (
+    <div key={index} className="SingleComment">
       <div className="starsForComments">
         {[...Array(5)].map((star, index) => {
           index += 1;
@@ -76,11 +76,7 @@ export default function CollapsibleComments({
       </button>
       {isOpen && (
         <div className="content">
-          {ratingAndComments.length !== 0 ? (
-            ratingAndComments
-          ) : (
-            <p>No comments</p>
-          )}
+          {ratingAndComments ? ratingAndComments : <p>No comments</p>}
         </div>
       )}
     </div>

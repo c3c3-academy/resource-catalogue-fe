@@ -102,9 +102,7 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
           resourceId = response.data.resourceAdded.id;
         })
         .catch(function (error) {
-          console.log(error.response.data);
           const errorMessage = error.response.data.message;
-          console.log(error.response.data.message);
           if (errorMessage.includes("already exists")) {
             console.log("error 403 has been completed");
             setError403(true);

@@ -40,7 +40,6 @@ export default function SingleResourceLoggedIn(
       axios
         .get(`${API_BASE}/interactionsbyuser/${props.userId}`)
         .then((response) => {
-          console.log(response.data.interactions);
           setInteractionsByUser(response.data.interactions);
         })
         .catch(function (error) {
@@ -54,7 +53,6 @@ export default function SingleResourceLoggedIn(
     axios
       .get(`${API_BASE}/interactions/${props.resource.id}`)
       .then((response) => {
-        console.log(response.data.interactions);
         setInteractionsByResource(response.data.interactions);
       })
       .catch(function (error) {
