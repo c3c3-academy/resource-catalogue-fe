@@ -15,6 +15,7 @@ const mockResources: IResource[] = [
     tags: ["react"],
     isrecommended: "good",
     reason: "I would recommend. 10/10 would do again",
+    avgrating: "2.0",
   },
   {
     id: 2,
@@ -29,6 +30,7 @@ const mockResources: IResource[] = [
     postedbyuserid: "3",
     isrecommended: "good",
     reason: "Really helpful to build a regular expression from scratch",
+    avgrating: "2.0",
   },
   {
     id: 3,
@@ -44,6 +46,7 @@ const mockResources: IResource[] = [
     isrecommended: "good",
     reason:
       "There are small exercises which allow you to test yourself on the function you are learning about.",
+    avgrating: "2.0",
   },
 ];
 
@@ -87,6 +90,7 @@ test("Check the returned resource is correct", () => {
       tags: ["react"],
       isrecommended: "good",
       reason: "I would recommend. 10/10 would do again",
+      avgrating: "2.0",
     },
   ];
   expect(result).toStrictEqual(expectedResult);
