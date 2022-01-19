@@ -111,7 +111,7 @@ function App(): JSX.Element {
   console.log(`This is the item saved in memory: ${savedUserId}`);
 
   return (
-    <>
+    <div className="App">
       <Router>
         <Routes>
           <Route
@@ -182,7 +182,7 @@ function App(): JSX.Element {
           />
         </Routes>
       </Router>
-    </>
+    </div>
   );
 }
 

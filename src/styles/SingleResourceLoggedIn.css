@@ -1,32 +1,41 @@
 .SingleResourceLoggedIn {
-  padding: 10px 8px;
-  margin: 10px 15px;
-  border: 1px solid #00695c;
+  padding: 20px 30px;
+  margin: 15px 15px;
   border-radius: 5px;
-  background-color: #b2dfdb;
+  background-color: #d1c4e9;
 }
 
 .ResourceHeader {
   display: flex;
 }
 
-.SingleResourceLoggedIn h3 {
+.ResourceName {
+  float: left;
   flex: 70%;
 }
 
-.DateAuthor {
-  flex: 30%;
-}
-
 .AddToStudy {
-  background-color: gold;
+  font-size: 16px;
+  padding: 10px;
+  float: right;
+  flex: 30%;
+  background-color: #ffe0b2;
+  border: 2px solid #ff9800;
+  border-radius: 20px;
 }
 
 .DeleteToStudy {
-  background-color: tomato;
+  font-size: 16px;
+  float: right;
+  padding: 10px;
+  flex: 30%;
+  background-color: #ffccbc;
+  border: 2px solid #ff5722;
+  border-radius: 20px;
 }
 
 .AddToStudy:hover {
+  background-color: #ff8a65;
   cursor: pointer;
 }
 

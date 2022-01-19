@@ -1,3 +1,4 @@
+import "../styles/Resources.css";
 import SingleResource from "./SingleResource";
 import SingleResourceLoggedIn from "./SingleResourceLoggedIn";
 import { containsTerm } from "../utils/containsTerm";

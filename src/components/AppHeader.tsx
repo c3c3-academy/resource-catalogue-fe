@@ -62,7 +62,7 @@ export default function AppHeader({
             <div className="LoginSelector">
               <p className="loginText">Log in to view more options.</p>
               <select
-                className="userDropDown"
+                className="userDropDown form-select-sm"
                 name="ChooseUser"
                 id="ChooseUser"
                 onChange={(e) => handleLogIn(e.target.value)}
