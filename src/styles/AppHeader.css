@@ -1,0 +1,37 @@
+.AppHeader {
+  background-color: #d1c4e9;
+  margin: 0;
+  padding: 10px;
+  width: 100%;
+}
+.Header {
+  display: flex;
+  vertical-align: middle;
+  align-items: center;
+}
+.welcomeText {
+  font-family: "Neonderthaw", cursive;
+  font-size: 45px;
+  vertical-align: middle;
+  width: 100%;
+  flex: 50%;
+  float: left;
+}
+
+.LogIn {
+  float: right;
+  vertical-align: middle;
+  padding-right: 20px;
+}
+
+.LoginSelector {
+  display: flex;
+}
+
+.LoggedIn {
+  display: flex;
+}
+
+.loginText {
+  margin-right: 10px;
+}

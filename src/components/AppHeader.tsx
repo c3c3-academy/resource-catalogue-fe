@@ -1,3 +1,4 @@
+import "../styles/AppHeader.css";
 import NavBar from "./NavBar";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -53,39 +54,40 @@ export default function AppHeader({
   ));
 
   return (
-    <>
-      <h1 className="welcomeText">Welcome to Cohort 3 Resource Catalogue</h1>
-      {userId === null ? (
-        <div className="LoginSelector">
-          <select
-            className="userDropDown"
-            name="ChooseUser"
-            id="ChooseUser"
-            onChange={(e) => handleLogIn(e.target.value)}
-          >
-            <option value="">Select User</option>
-            {userOptions}
-          </select>
-        </div>
-      ) : (
-        <>
-          {userList[0] && (
-            <p>
-              You are now logged in as
-              {" " + getusername(userList, savedUserId)}
-            </p>
-          )}
+    <header className="AppHeader">
+      <div className="Header">
+        <h1 className="welcomeText">Willy Wonka's Resource Factory</h1>
+        <div className="LogIn">
+          {userId === null ? (
+            <div className="LoginSelector">
+              <p className="loginText">Log in to view more options.</p>
+              <select
+                className="userDropDown"
+                name="ChooseUser"
+                id="ChooseUser"
+                onChange={(e) => handleLogIn(e.target.value)}
+              >
+                <option value="">Select User</option>
+                {userOptions}
+              </select>
+            </div>
+          ) : (
+            <div className="LoggedIn">
+              {userList[0] && (
+                <p className="loginText">
+                  You are now logged in as
+                  {" " + getusername(userList, savedUserId)}
+                </p>
+              )}
 
-          <button className="LogOut" onClick={handleLogOut}>
-            Log out
-          </button>
-        </>
-      )}
-      {userId === null ? (
-        <p>Log in to view more options.</p>
-      ) : (
-        <NavBar savedUserId={savedUserId} />
-      )}
-    </>
+              <button className="LogOut" onClick={handleLogOut}>
+                Log out
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+      {userId !== null && <NavBar savedUserId={savedUserId} />}
+    </header>
   );
 }
