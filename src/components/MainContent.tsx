@@ -30,6 +30,7 @@ export default function MainContent({
       <div className="left">
         <div className="SearchInput">
           <input
+            className="form-control"
             type="text"
             placeholder="Search resources"
             name="search"
@@ -38,13 +39,15 @@ export default function MainContent({
               setSearchTerm(e.target.value);
             }}
           />
-          {filteredNumber === null ? (
-            <p className="FoundResource">Loading...</p>
-          ) : filteredNumber === 0 ? (
-            <p className="FoundResource">No resources found.</p>
-          ) : (
-            <p className="FoundResource">{filteredNumber} resources found.</p>
-          )}
+          <div className="resourcesFound">
+            {filteredNumber === null ? (
+              <p className="FoundResource">Loading...</p>
+            ) : filteredNumber === 0 ? (
+              <p className="FoundResource">No resources found.</p>
+            ) : (
+              <p className="FoundResource">{filteredNumber} resources found.</p>
+            )}
+          </div>
         </div>
         <Resources
           userList={userList}
