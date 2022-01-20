@@ -1,3 +1,4 @@
+import "../styles/ToStudy.css";
 import SingleResourceLoggedIn from "../components/SingleResourceLoggedIn";
 import { useNavigate } from "react-router-dom";
 import { IResource, IToStudy, IUser } from "../utils/Interfaces";
@@ -37,9 +38,12 @@ const ToStudy = ({
   );
 
   return (
-    <div>
-      <h1>To Study</h1>
-      <p>{`This is the list to study of user ${savedUserId}`}</p>
+    <div className="ToStudy">
+      <h1>My Box of Resources</h1>
+      <p>
+        Your finest selection of resources, tailor picked to study by you, for
+        you.
+      </p>
       {toStudyResources}
     </div>
   );

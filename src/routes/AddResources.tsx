@@ -143,8 +143,11 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
   return (
     <div className="AddResources">
       <h1>Add Resource</h1>
+      <p>
+        Concoct the newest Resource flavour by entering the ingredients below.
+      </p>
 
-      <form>
+      <form className="form">
         <div>
           <input
             type="text"
@@ -185,7 +188,7 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
             onChange={(e) => setEnteredTags(e.target.value)}
           />
         </div>
-        <div>
+        <div className="TypeStage">
           <label htmlFor="type">Content Type: </label>
           <select
             id="type"
@@ -194,6 +197,7 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
           >
             {contentTypesOptions}
           </select>
+          <br />
           <label htmlFor="stage">Recommeneded Stage: </label>
           <select
             id="stage"
@@ -202,20 +206,21 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
           >
             {contentStageOptions}
           </select>
+          <br />
+          <label htmlFor="recommend">Do you recommend this resource?: </label>
+          <select id="recommend" onChange={(e) => setRecommend(e.target.value)}>
+            <option disabled>Recommened Type</option>
+            <option value="good">
+              I recommend this resource after having used it
+            </option>
+            <option value="bad">
+              I do not recommend this resource, having used it
+            </option>
+            <option value="unknown">
+              I haven't used this resource but it looks promising
+            </option>
+          </select>
         </div>
-        <label htmlFor="recommend">Do you recommend this resource?: </label>
-        <select id="recommend" onChange={(e) => setRecommend(e.target.value)}>
-          <option disabled>Recommened Type</option>
-          <option value="good">
-            I recommend this resource after having used it
-          </option>
-          <option value="bad">
-            I do not recommend this resource, having used it
-          </option>
-          <option value="unknown">
-            I haven't used this resource but it looks promising
-          </option>
-        </select>
         <div>
           <input
             type="text"
@@ -225,7 +230,9 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
           />
         </div>
       </form>
-      <button onClick={() => handleSubmit()}>Add Resource </button>
+      <button className="AddResourceButton" onClick={() => handleSubmit()}>
+        Add Resource{" "}
+      </button>
       {textIsUndefined && (
         <p className="fieldEmpty">please complete all fields</p>
       )}

@@ -3,9 +3,9 @@ interface NavBarProps {
   savedUserId: string | null;
 }
 
-const baseURL = "https://c3c3-resource-catalogue.netlify.app/";
+// const baseURL = "https://c3c3-resource-catalogue.netlify.app/";
 
-// const baseURL = "http://localhost:3000/";
+const baseURL = "http://localhost:3000/";
 
 export default function NavBar({ savedUserId }: NavBarProps): JSX.Element {
   return (
@@ -14,10 +14,10 @@ export default function NavBar({ savedUserId }: NavBarProps): JSX.Element {
         <a href={`${baseURL}`}>Main Page</a>
       </li>
       <li>
-        <a href={`${baseURL}add-resources`}>Add Resource</a>
+        <a href={`${baseURL}add-resources`}>Add a New Resource Flavour</a>
       </li>
       <li>
-        <a href={`${baseURL}to-study-list`}>Study List</a>
+        <a href={`${baseURL}to-study-list`}>My Box of Resources</a>
       </li>
     </ul>
   );
