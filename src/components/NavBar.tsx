@@ -1,4 +1,3 @@
-import "../styles/NavBar.css";
 interface NavBarProps {
   savedUserId: string | null;
 }
@@ -9,7 +8,7 @@ const baseURL = "https://c3c3-resource-catalogue.netlify.app/";
 
 export default function NavBar({ savedUserId }: NavBarProps): JSX.Element {
   return (
-    <ul className="NavBar">
+    <ul className="nav-bar">
       <li>
         <a href={`${baseURL}`}>Main Page</a>
       </li>

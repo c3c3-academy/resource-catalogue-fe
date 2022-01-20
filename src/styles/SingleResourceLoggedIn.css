@@ -9,10 +9,15 @@
   display: flex;
 }
 
-.ResourceName {
+.ResourceNameAndRating {
   float: left;
   flex: 70%;
   padding-bottom: 0;
+  display: flex;
+}
+
+.ResourceName {
+  padding-right: 20px;
 }
 
 .AddToStudy {
@@ -51,4 +56,9 @@
 
 .addedBy {
   padding: 0;
+}
+
+.rating {
+  font-size: 20px;
+  padding-top: 3px;
 }
