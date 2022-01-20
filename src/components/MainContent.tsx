@@ -23,6 +23,7 @@ export default function MainContent({
 }: MainContentProps): JSX.Element {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedTags, setSelectedTags] = useState<ITag[]>([]);
+  const [filteredNumber, setFilteredNumber] = useState<number | null>(null);
 
   return (
     <div className="MainContent">
@@ -37,6 +38,13 @@ export default function MainContent({
               setSearchTerm(e.target.value);
             }}
           />
+          {filteredNumber === null ? (
+            <p className="FoundResource">Loading...</p>
+          ) : filteredNumber === 0 ? (
+            <p className="FoundResource">No resources found.</p>
+          ) : (
+            <p className="FoundResource">{filteredNumber} resources found.</p>
+          )}
         </div>
         <Resources
           userList={userList}
@@ -47,6 +55,7 @@ export default function MainContent({
           toStudyIds={toStudyIds}
           getToStudy={getToStudy}
           setGetToStudy={setGetToStudy}
+          setFilteredNumber={setFilteredNumber}
         />
       </div>
       <div className="right">

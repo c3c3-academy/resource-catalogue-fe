@@ -54,13 +54,13 @@ export default function AppHeader({
   ));
 
   return (
-    <header className="AppHeader">
+    <header className="AppHeader sticky-top">
       <div className="Header">
         <h1 className="welcomeText">Willy Wonka's Resource Factory</h1>
         <div className="LogIn">
           {userId === null ? (
             <div className="LoginSelector">
-              <p className="loginText">Log in to view more options.</p>
+              <p className="loginText">Sign in:</p>
               <select
                 className="userDropDown form-select-sm"
                 name="ChooseUser"
@@ -74,15 +74,20 @@ export default function AppHeader({
           ) : (
             <div className="LoggedIn">
               {userList[0] && (
-                <p className="loginText">
-                  You are now logged in as
+                <p className="loginTextTwo">
+                  <img
+                    src="https://img.icons8.com/small/30/000000/user.png"
+                    alt="logged in"
+                  />
                   {" " + getusername(userList, savedUserId)}
                 </p>
               )}
-
-              <button className="LogOut" onClick={handleLogOut}>
-                Log out
-              </button>
+              <img
+                className="LogOut"
+                onClick={handleLogOut}
+                src="https://img.icons8.com/external-sbts2018-mixed-sbts2018/58/000000/external-logout-social-media-basic-1-sbts2018-mixed-sbts2018.png"
+                alt="logout"
+              />
             </div>
           )}
         </div>

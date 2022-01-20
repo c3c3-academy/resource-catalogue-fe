@@ -19,11 +19,11 @@ export default function SingleResource(
           {props.resource.resourcename}
         </a>
       </h3>
-      <p>
+      <p className="author">By {props.resource.authorname} </p>
+      <p className="addedBy">
         Added on {getDate(props.resource.creationdate)} by{" "}
-        {getusername(props.userList, parseInt(props.resource.postedbyuserid))}
+        {getusername(props.userList, props.resource.postedbyuserid)}
       </p>
-      <p>Author: {props.resource.authorname} </p>
       <p>URL: {props.resource.url} </p>
       <p>Description: {props.resource.description} </p>
       <p>Tags:{props.resource.tags.join(", ")} </p>

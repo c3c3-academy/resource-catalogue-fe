@@ -12,6 +12,7 @@
 .ResourceName {
   float: left;
   flex: 70%;
+  padding-bottom: 0;
 }
 
 .AddToStudy {
@@ -41,4 +42,13 @@
 
 .DeleteToStudy:hover {
   cursor: pointer;
+}
+
+.author {
+  margin-top: 0;
+  padding: 0;
+}
+
+.addedBy {
+  padding: 0;
 }

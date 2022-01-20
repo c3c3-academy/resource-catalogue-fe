@@ -27,6 +27,7 @@
 
 .LoginSelector {
   display: flex;
+  height: 30px;
 }
 
 .LoggedIn {
@@ -34,16 +35,21 @@
 }
 
 .loginText {
+  padding-top: 2px;
+  margin-right: 10px;
+}
+
+.loginTextTwo {
   margin-right: 10px;
   padding-top: 10px;
 }
 
 .LogOut {
-  background-color: white;
-  border: 1px solid #4a148c;
-  border-radius: 3px;
-  transition: 0.3s;
+  background-color: transparent;
+  width: 33px;
+  height: 36px;
+  padding-top: 9px;
 }
 .LogOut:hover {
-  background-color: #d1c4e9;
+  cursor: pointer;
 }
