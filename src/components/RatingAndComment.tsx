@@ -57,7 +57,7 @@ export default function RatingAndComment({
               </button>
             );
           })}
-          <p>You rated this resource!</p>
+          <p className="prompt">You rated this resource!</p>
         </div>
       ) : (
         <div className="star-rating">

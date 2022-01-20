@@ -53,15 +53,16 @@
 .author {
   margin-top: 0;
   padding: 0;
+  font-size: 14px;
 }
 
 .description {
   font-size: 20px;
-  font-style: italic;
 }
 
 .addedBy {
   padding: 0;
+  font-style: italic;
 }
 
 .rating {
@@ -71,16 +72,39 @@
 
 .ResourceTags {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 4px;
+  justify-content: right;
 }
 
 .ResourceTag {
   color: white;
   margin-left: 2px;
   margin-bottom: 4px;
-  padding: 5px 10px;
+  padding: 3px 6px;
   border: 2px solid white;
   border-radius: 20px;
   background-color: #7e57c2;
   transition: 0.3s;
+  font-size: 14px;
+}
+
+.ResourceBody {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.LeftSide {
+  flex: 70%;
+}
+
+.RightSide {
+  flex: 30%;
+  float: right;
+  text-align: right;
+}
+
+.emojiRecommend {
+  margin-right: 10px;
+  font-style: normal;
 }

@@ -108,6 +108,10 @@ export default function SingleResourceLoggedIn(
     </span>
   ));
 
+  function capitalizeFirstLetter(string: string): string {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   return (
     <div className="SingleResourceLoggedIn">
       <div className="ResourceHeader">
@@ -130,17 +134,27 @@ export default function SingleResourceLoggedIn(
         </div>
         {buttonElement}
       </div>
-      <p className="author">By {props.resource.authorname} </p>
-      <p className="description">{props.resource.description} </p>
-      <p>Content Type: {props.resource.contenttype}</p>
-      <p>Recommended Mark Stage: {props.resource.contentstage}</p>
-      <p>Recommendation: {isRecommended(props.resource.isrecommended)} </p>
-      <p className="addedBy">
-        {getusername(props.userList, props.resource.postedbyuserid)} added this
-        on {getDate(props.resource.creationdate)} for the following reason:
+      <p className="author">
+        {capitalizeFirstLetter(props.resource.contenttype)} by{" "}
+        {props.resource.authorname}{" "}
       </p>
-      <p>"{props.resource.reason}"</p>
-      <div className="ResourceTags">{tagElements}</div>
+      <div className="ResourceBody">
+        <div className="LeftSide">
+          <p className="description">{props.resource.description} </p>
+          <p className="addedBy">
+            <span className="emojiRecommend">
+              {isRecommended(props.resource.isrecommended)}
+            </span>
+            "{props.resource.reason}" -{" "}
+            {getusername(props.userList, props.resource.postedbyuserid)} (
+            {getDate(props.resource.creationdate)})
+          </p>
+        </div>
+        <div className="RightSide">
+          <div className="ResourceTags">{tagElements}</div>
+          <p>{props.resource.contentstage}</p>
+        </div>
+      </div>
       <RatingAndComment
         resourceId={props.resource.id}
         userId={props.userId}
