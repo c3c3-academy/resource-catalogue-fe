@@ -49,7 +49,7 @@ export default function CollapsibleComments({
               key={index}
               className={index <= interaction.rating ? "on" : "off"}
             >
-              <span className="star">&#9733;</span>
+              <span className="star">&#127851;</span>
             </button>
           );
         })}

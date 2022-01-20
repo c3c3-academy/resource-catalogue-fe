@@ -32,6 +32,14 @@ export default function RatingAndComment({
   return (
     <div className="RatingAndComment">
       {hasUserCommented(resourceId, userId, interactions) ? (
+        <></>
+      ) : (
+        <p className="prompt">
+          How many chocolate bars is this resource worth? Rate to leave a
+          comment!
+        </p>
+      )}
+      {hasUserCommented(resourceId, userId, interactions) ? (
         <div className="star-rating">
           {[...Array(5)].map((star, index) => {
             index += 1;
@@ -45,7 +53,7 @@ export default function RatingAndComment({
                     : "off"
                 }
               >
-                <span className="star">&#9733;</span>
+                <span className="star">&#127851;</span>
               </button>
             );
           })}
@@ -64,14 +72,27 @@ export default function RatingAndComment({
                 onMouseEnter={() => setHover(index)}
                 onMouseLeave={() => setHover(rating)}
               >
-                <span className="star">&#9733;</span>
+                <span className="star">&#127851;</span>
               </button>
             );
           })}
           {rating ? (
+            <button
+              className="clear"
+              onClick={() => {
+                setRating(0);
+                setHover(0);
+              }}
+            >
+              Clear
+            </button>
+          ) : (
+            <></>
+          )}
+          {rating ? (
             <AddComment
-              userId={userId}
               resourceId={resourceId}
+              userId={userId}
               API_BASE={API_BASE}
               rating={rating}
               interactions={interactions}
@@ -79,7 +100,7 @@ export default function RatingAndComment({
               getUpdatedInteractions={getUpdatedInteractions}
             />
           ) : (
-            <p>Rate the resource to add a comment</p>
+            <></>
           )}
         </div>
       )}
