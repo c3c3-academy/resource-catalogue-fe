@@ -9,17 +9,22 @@
   display: flex;
 }
 
-.ResourceName {
+.ResourceNameAndRating {
   float: left;
-  flex: 70%;
+  flex: 85%;
   padding-bottom: 0;
+  display: flex;
+}
+
+.ResourceName {
+  padding-right: 20px;
 }
 
 .AddToStudy {
   font-size: 16px;
-  padding: 10px;
+  padding: 10px 5px;
   float: right;
-  flex: 30%;
+  flex: 15%;
   background-color: #ffe0b2;
   border: 2px solid #ff9800;
   border-radius: 20px;
@@ -28,19 +33,20 @@
 .DeleteToStudy {
   font-size: 16px;
   float: right;
-  padding: 10px;
-  flex: 30%;
+  padding: 10px 5px;
+  flex: 15%;
   background-color: #ffccbc;
   border: 2px solid #ff5722;
   border-radius: 20px;
 }
 
 .AddToStudy:hover {
-  background-color: #ff8a65;
+  background-color: #ffb74d;
   cursor: pointer;
 }
 
 .DeleteToStudy:hover {
+  background-color: #ff8a65;
   cursor: pointer;
 }
 
@@ -51,4 +57,9 @@
 
 .addedBy {
   padding: 0;
+}
+
+.rating {
+  font-size: 20px;
+  padding-top: 3px;
 }

@@ -104,12 +104,24 @@ export default function SingleResourceLoggedIn(
   return (
     <div className="SingleResourceLoggedIn">
       <div className="ResourceHeader">
-        <h3 className="ResourceName">
-          <a href={props.resource.url} target="_blank" rel="noreferrer">
-            {props.resource.resourcename}
-          </a>
-          {buttonElement}
-        </h3>
+        <div className="ResourceNameAndRating">
+          <h3 className="ResourceName">
+            <a href={props.resource.url} target="_blank" rel="noreferrer">
+              {props.resource.resourcename}
+            </a>
+          </h3>
+          {props.resource.avgrating !== null ? (
+            <p className="rating">
+              {props.resource.avgrating + " "}
+              <span>&#127851;</span>
+            </p>
+          ) : (
+            <p className="rating">
+              -- <span>&#127851;</span>
+            </p>
+          )}
+        </div>
+        {buttonElement}
       </div>
       <p className="author">By {props.resource.authorname} </p>
       <p className="addedBy">
