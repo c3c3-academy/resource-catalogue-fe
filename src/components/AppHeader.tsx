@@ -1,3 +1,4 @@
+import "../styles/AppHeader.css";
 import NavBar from "./NavBar";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -53,39 +54,45 @@ export default function AppHeader({
   ));
 
   return (
-    <>
-      <h1 className="welcomeText">Welcome to Cohort 3 Resource Catalogue</h1>
-      {userId === null ? (
-        <div className="LoginSelector">
-          <select
-            className="userDropDown"
-            name="ChooseUser"
-            id="ChooseUser"
-            onChange={(e) => handleLogIn(e.target.value)}
-          >
-            <option value="">Select User</option>
-            {userOptions}
-          </select>
-        </div>
-      ) : (
-        <>
-          {userList[0] && (
-            <p>
-              You are now logged in as
-              {" " + getusername(userList, savedUserId)}
-            </p>
+    <header className="AppHeader sticky-top">
+      <div className="Header">
+        <h1 className="welcomeText">Willy Wonka's Resource Factory</h1>
+        <div className="LogIn">
+          {userId === null ? (
+            <div className="LoginSelector">
+              <p className="loginText">Sign in:</p>
+              <select
+                className="userDropDown form-select-sm"
+                name="ChooseUser"
+                id="ChooseUser"
+                onChange={(e) => handleLogIn(e.target.value)}
+              >
+                <option value="">Select User</option>
+                {userOptions}
+              </select>
+            </div>
+          ) : (
+            <div className="LoggedIn">
+              {userList[0] && (
+                <p className="loginTextTwo">
+                  <img
+                    src="https://img.icons8.com/small/30/000000/user.png"
+                    alt="logged in"
+                  />
+                  {" " + getusername(userList, savedUserId)}
+                </p>
+              )}
+              <img
+                className="LogOut"
+                onClick={handleLogOut}
+                src="https://img.icons8.com/external-sbts2018-mixed-sbts2018/58/000000/external-logout-social-media-basic-1-sbts2018-mixed-sbts2018.png"
+                alt="logout"
+              />
+            </div>
           )}
-
-          <button className="LogOut" onClick={handleLogOut}>
-            Log out
-          </button>
-        </>
-      )}
-      {userId === null ? (
-        <p>Log in to view more options.</p>
-      ) : (
-        <NavBar savedUserId={savedUserId} />
-      )}
-    </>
+        </div>
+      </div>
+      {userId !== null && <NavBar savedUserId={savedUserId} />}
+    </header>
   );
 }

@@ -103,16 +103,19 @@ export default function SingleResourceLoggedIn(
   );
   return (
     <div className="SingleResourceLoggedIn">
-      <h3>
-        <a href={props.resource.url} target="_blank" rel="noreferrer">
-          {props.resource.resourcename}
-        </a>
-      </h3>
-      <p>
+      <div className="ResourceHeader">
+        <h3 className="ResourceName">
+          <a href={props.resource.url} target="_blank" rel="noreferrer">
+            {props.resource.resourcename}
+          </a>
+          {buttonElement}
+        </h3>
+      </div>
+      <p className="author">By {props.resource.authorname} </p>
+      <p className="addedBy">
         Added on {getDate(props.resource.creationdate)} by{" "}
-        {getusername(props.userList, parseInt(props.resource.postedbyuserid))}
+        {getusername(props.userList, props.resource.postedbyuserid)}
       </p>
-      <p>Author: {props.resource.authorname} </p>
       <p>URL: {props.resource.url} </p>
       <p>Description: {props.resource.description} </p>
       <p>Tags:{props.resource.tags.join(", ")} </p>
@@ -120,7 +123,7 @@ export default function SingleResourceLoggedIn(
       <p>Recommended Mark Stage: {props.resource.contentstage}</p>
       <p>Recommendation: {isRecommended(props.resource.isrecommended)} </p>
       <p>Reason: {props.resource.reason} </p>
-      {buttonElement}
+
       <RatingAndComment
         resourceId={props.resource.id}
         userId={props.userId}

@@ -1,3 +1,4 @@
+import "../styles/Resources.css";
 import SingleResource from "./SingleResource";
 import SingleResourceLoggedIn from "./SingleResourceLoggedIn";
 import { containsTerm } from "../utils/containsTerm";
@@ -12,6 +13,7 @@ interface ResourcesProps {
   toStudyIds: IToStudy[];
   getToStudy: boolean;
   setGetToStudy: (input: boolean) => void;
+  setFilteredNumber: (input: number | null) => void;
 }
 
 export default function Resources({
@@ -23,6 +25,7 @@ export default function Resources({
   toStudyIds,
   getToStudy,
   setGetToStudy,
+  setFilteredNumber,
 }: ResourcesProps): JSX.Element {
   const filteredResources = resources
     .filter((element) => {
@@ -71,15 +74,7 @@ export default function Resources({
         />
       );
     });
+  setFilteredNumber(filteredResources.length);
 
-  return (
-    <div className="Resources">
-      {filteredResources.length === 0 ? (
-        <p>No resources found.</p>
-      ) : (
-        <p>{filteredResources.length} resources found.</p>
-      )}
-      {filteredResources}
-    </div>
-  );
+  return <div className="Resources">{filteredResources}</div>;
 }

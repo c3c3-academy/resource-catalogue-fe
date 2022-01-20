@@ -141,7 +141,7 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
   };
 
   return (
-    <div>
+    <div className="AddResources">
       <h1>Add Resource</h1>
 
       <form>

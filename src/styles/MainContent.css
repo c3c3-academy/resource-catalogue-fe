@@ -1,5 +1,9 @@
 .MainContent {
   display: flex;
+  margin: 0 30px 20px 0;
+  padding-top: 20px;
+  padding-left: 30px;
+  top: 0;
 }
 
 .left {
@@ -10,8 +14,15 @@
   flex: 20%;
 }
 
+.SearchInput {
+  width: 100%;
+  margin: 0;
+  position: fixed;
+  background-color: white;
+}
+
 input {
-  width: 80%;
+  width: 70%;
   padding: 10px;
   margin: 18px;
 }
