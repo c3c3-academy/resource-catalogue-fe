@@ -7,13 +7,7 @@ test("Check datatype is a string", () => {
 });
 
 test("Check return is the correct statement", () => {
-  expect(isRecommended("good")).toBe(
-    "I recommend this resource after having used it"
-  );
-  expect(isRecommended("bad")).toBe(
-    "I do not recommend this resource, having used it"
-  );
-  expect(isRecommended("unknown")).toBe(
-    "I haven't used this resource but it looks promising"
-  );
+  expect(isRecommended("good")).toBe("👍");
+  expect(isRecommended("bad")).toBe("👎");
+  expect(isRecommended("unknown")).toBe("🤷");
 });

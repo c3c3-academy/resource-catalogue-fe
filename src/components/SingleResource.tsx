@@ -31,6 +31,12 @@ export default function SingleResource(
       });
   }, [props.resource.id]);
 
+  const tagElements = props.resource.tags.map((tag, index) => (
+    <span key={index} className="ResourceTag">
+      {tag}
+    </span>
+  ));
+
   return (
     <div className="SingleResource">
       <div className="ResourceHeader">
@@ -53,17 +59,16 @@ export default function SingleResource(
         </div>
       </div>
       <p className="author">By {props.resource.authorname} </p>
-      <p className="addedBy">
-        Added on {getDate(props.resource.creationdate)} by{" "}
-        {getusername(props.userList, props.resource.postedbyuserid)}
-      </p>
-      <p>URL: {props.resource.url} </p>
-      <p>Description: {props.resource.description} </p>
-      <p>Tags:{props.resource.tags.join(", ")} </p>
+      <p className="description">{props.resource.description} </p>
       <p>Content Type: {props.resource.contenttype}</p>
       <p>Recommended Mark Stage: {props.resource.contentstage}</p>
       <p>Recommendation: {isRecommended(props.resource.isrecommended)} </p>
-      <p>Reason: {props.resource.reason} </p>
+      <p className="addedBy">
+        {getusername(props.userList, props.resource.postedbyuserid)} added this
+        on {getDate(props.resource.creationdate)} for the following reason:
+      </p>
+      <p>"{props.resource.reason}"</p>
+      <div className="ResourceTags">{tagElements}</div>
 
       <CollapsibleCommentsLoggedOut
         userList={props.userList}

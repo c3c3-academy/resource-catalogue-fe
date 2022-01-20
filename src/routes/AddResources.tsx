@@ -142,7 +142,7 @@ export default function AddResources(props: AddResourceProps): JSX.Element {
 
   return (
     <div className="AddResources">
-      <h1>Add Resource</h1>
+      <h1>Submit Resource</h1>
       <p>
         Concoct the newest Resource flavour by entering the ingredients below.
       </p>
