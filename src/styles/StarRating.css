@@ -3,14 +3,50 @@
   border: none;
   outline: none;
   cursor: pointer;
-  color: rgb(248, 215, 27);
   font-size: large;
+  text-shadow: 0 0 5px gold;
 }
 .off {
   background-color: transparent;
   border: none;
   outline: none;
   cursor: pointer;
-  color: rgb(122, 120, 120);
   font-size: large;
+  filter: grayscale(100%);
+}
+
+.clear {
+  background-color: #c6b2ec;
+  color: #4a148c;
+  border: 2px solid #4a148c;
+  padding: 3px 5px;
+  border-radius: 8px;
+  margin-left: 15px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+.clear:hover {
+  background-color: #d1c4e9;
+}
+
+.SubmitRating {
+  background-color: #c6b2ec;
+  color: #4a148c;
+  border: 2px solid #4a148c;
+  padding: 3px 5px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+.SubmitRating:hover {
+  background-color: #d1c4e9;
+}
+
+.star-rating {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.prompt {
+  margin-bottom: 3px;
 }

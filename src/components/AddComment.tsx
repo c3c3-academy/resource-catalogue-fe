@@ -53,9 +53,8 @@ export default function AddComment(props: AddCommentProps): JSX.Element {
           }}
         />
         <button
-          className="btn btn-outline-secondary"
+          className="SubmitRating"
           type="button"
-          id="button-addon2"
           onClick={() => handleSubmit()}
         >
           Submit rating
