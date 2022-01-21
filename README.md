@@ -3,13 +3,16 @@
 This is a web application designed for sharing resources.
 
 ## Setup
+
 After following set up instructions for the back end:
-- Clone and open this repo
-- Run `yarn` to install the project dependencies
-- Run with `yarn start`
-- Optionally deploy the site to Netlify from GitHub
+
+- Clone and open this repo,
+- Run `yarn` to install the project dependencies,
+- Run with `yarn start`,
+- Optionally deploy the site to Netlify from GitHub.
 
 ## Project documentation
+
 Read the [documentation](https://www.notion.so/weareacademy/Team-C3C3-Project-3-f6c294677db04465995852662384ba71) used to develop this site on our Notion page.
 See a [live version](https://c3c3-resource-catalogue.netlify.app/) of this site.
 
