@@ -152,7 +152,9 @@ export default function SingleResourceLoggedIn(
         </div>
         <div className="RightSide">
           <div className="ResourceTags">{tagElements}</div>
-          <p>{props.resource.contentstage}</p>
+          {props.resource.contentstage === "Other"
+            ? ""
+            : props.resource.contentstage}
         </div>
       </div>
       <RatingAndComment
