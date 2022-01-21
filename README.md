@@ -1,5 +1,7 @@
 # Willy Wonka's Resource Factory
 
+This is a web application designed for sharing resources.
+
 ## Setup
 After following set up instructions for the back end:
 - Clone and open this repo
