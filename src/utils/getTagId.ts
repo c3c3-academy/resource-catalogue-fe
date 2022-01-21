@@ -7,6 +7,9 @@ interface Props {
   tags: ITag[];
 }
 
+// Given a tag, e.g. "HTML", and a list of tags,  getTagId returns the id of "HTML" in the list tags. IF "HTML" is not already in that list, then it is posted to that list, and the tagId is returned.
+//  The list of tags is fetched in a useEffect in App.tsx, and passed down to AddResources.tsx
+
 export async function getTagId(props: Props): Promise<number> {
   const filtered = props.tags.filter(
     (tag) => tag.category.toLowerCase() === props.tagToCheck.toLowerCase()

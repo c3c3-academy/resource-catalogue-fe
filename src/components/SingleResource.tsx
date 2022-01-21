@@ -79,7 +79,11 @@ export default function SingleResource(
         </div>
         <div className="RightSide">
           <div className="ResourceTags">{tagElements}</div>
-          <p>{props.resource.contentstage}</p>
+          <p>
+            {props.resource.contentstage === "Other"
+              ? ""
+              : props.resource.contentstage}
+          </p>
         </div>
       </div>
       <CollapsibleCommentsLoggedOut
