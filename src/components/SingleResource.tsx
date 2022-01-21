@@ -59,9 +59,6 @@ export default function SingleResource(
               -- <span>&#127851;</span>
             </p>
           )}
-          <p className="emojiRecommend">
-            {isRecommended(props.resource.isrecommended)}{" "}
-          </p>
         </div>
       </div>
       <p className="author">
